@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import PhotoMasonry from "@/components/PhotoMasonry";
-import TornDivider from "@/components/TornDivider";
 import RegMark from "@/components/RegMark";
 
 export const metadata: Metadata = {
@@ -31,36 +29,27 @@ const CATALOGUE_ITEMS = [
 export default function CataloguePage() {
   return (
     <div>
-      <section className="relative overflow-hidden bg-brand-black py-16 text-white">
-        <Image
-          src="/images/printing-press.jpg"
-          alt="Printing press"
-          fill
-          className="object-cover opacity-30"
-        />
-        <div className="relative mx-auto max-w-6xl px-6">
-          <p className="flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-brand-yellow">
-            <RegMark className="h-4 w-4" />
-            Catalogue
-          </p>
-          <h1 className="mt-2 text-4xl font-bold">A Sample of Our Work</h1>
-          <p className="mt-3 max-w-2xl text-white/80">
-            Real branded products and printed materials we&apos;ve produced
-            for our clients. Get in touch for the full catalogue and custom
-            quotes.
-          </p>
-        </div>
-        <TornDivider color="#ffffff" className="absolute bottom-0 left-0" />
+      <section className="border-b border-line px-6 py-16 sm:px-10 sm:py-24">
+        <p className="eyebrow flex items-center gap-2 text-ink-soft">
+          <RegMark className="h-4 w-4 text-brand-blue" />
+          Catalogue
+        </p>
+        <h1 className="font-display mt-4 text-5xl leading-tight text-ink sm:text-6xl">
+          A Sample of Our Work
+        </h1>
+        <p className="mt-4 max-w-md text-ink-soft">
+          Real branded products and printed materials we&apos;ve produced
+          for our clients. Get in touch for the full catalogue and custom
+          quotes.
+        </p>
       </section>
 
-      <section className="bg-dot-grid bg-white py-16">
-        <div className="mx-auto max-w-6xl px-6">
-          <PhotoMasonry
-            items={CATALOGUE_ITEMS}
-            basePath="/images/catalogue"
-            fit="cover"
-          />
-        </div>
+      <section className="px-6 py-16 sm:px-10 sm:py-24">
+        <PhotoMasonry
+          items={CATALOGUE_ITEMS}
+          basePath="/images/catalogue"
+          fit="cover"
+        />
       </section>
     </div>
   );

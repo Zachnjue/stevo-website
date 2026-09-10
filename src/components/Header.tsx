@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 const NAV = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
-  { href: "/services", label: "What We Do" },
+  { href: "/services", label: "Services" },
   { href: "/catalogue", label: "Catalogue" },
   { href: "/contact", label: "Contact" },
 ];
@@ -26,45 +26,32 @@ export default function Header() {
 
   return (
     <header
-      className={`sticky top-0 z-50 border-b bg-white/90 backdrop-blur transition-shadow duration-300 ${
-        scrolled ? "border-black/5 shadow-sm" : "border-transparent"
+      className={`sticky top-0 z-50 border-b bg-paper/95 backdrop-blur transition-colors duration-300 ${
+        scrolled ? "border-line" : "border-transparent"
       }`}
     >
-      <div
-        className={`mx-auto flex max-w-6xl items-center justify-between px-6 transition-[padding] duration-300 ${
-          scrolled ? "py-2" : "py-3"
-        }`}
-      >
-        <Link href="/" className="flex flex-col leading-tight" onClick={() => setOpen(false)}>
-          <span className="text-xl font-bold tracking-tight text-brand-black">
-            <span className="text-brand-pink">Thee</span> Printing Hub
-          </span>
-          <span
-            className={`italic text-brand-blue transition-all duration-300 ${
-              scrolled ? "max-h-0 overflow-hidden opacity-0" : "max-h-4 text-[11px] opacity-100"
-            }`}
-          >
-            Ink is our underlying foundation
-          </span>
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 sm:px-10">
+        <Link
+          href="/"
+          className="font-display text-lg leading-none tracking-tight text-ink"
+          onClick={() => setOpen(false)}
+        >
+          Thee Printing Hub
         </Link>
 
-        <nav className="hidden gap-8 text-sm font-medium text-brand-black md:flex">
+        <nav className="hidden items-center gap-10 text-xs md:flex">
           {NAV.map((item) => {
             const active = pathname === item.href;
             return (
               <Link
                 key={item.href}
                 href={item.href}
-                className={`relative py-1 transition-colors hover:text-brand-pink ${
-                  active ? "text-brand-pink" : ""
+                className={`eyebrow link-reveal ${
+                  active ? "text-accent" : "text-ink"
                 }`}
+                style={active ? { backgroundSize: "100% 1px" } : undefined}
               >
                 {item.label}
-                <span
-                  className={`absolute -bottom-1 left-0 h-0.5 w-full rounded-full bg-brand-pink transition-transform duration-200 ${
-                    active ? "scale-x-100" : "scale-x-0"
-                  }`}
-                />
               </Link>
             );
           })}
@@ -72,7 +59,7 @@ export default function Header() {
 
         <Link
           href="/contact"
-          className="hidden rounded-full bg-brand-blue px-5 py-2 text-sm font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-brand-blue-dark hover:shadow-md md:inline-block"
+          className="eyebrow hidden border border-ink px-5 py-2.5 text-ink transition-colors hover:border-brand-blue hover:bg-brand-blue hover:text-white md:inline-block"
         >
           Get a Quote
         </Link>
@@ -82,23 +69,21 @@ export default function Header() {
           className="flex flex-col gap-1.5 md:hidden"
           onClick={() => setOpen((v) => !v)}
         >
-          <span className="h-0.5 w-6 bg-brand-black" />
-          <span className="h-0.5 w-6 bg-brand-black" />
-          <span className="h-0.5 w-6 bg-brand-black" />
+          <span className="h-px w-6 bg-ink" />
+          <span className="h-px w-6 bg-ink" />
+          <span className="h-px w-6 bg-ink" />
         </button>
       </div>
 
       {open && (
-        <nav className="flex flex-col gap-1 border-t border-black/5 bg-white px-6 py-4 text-sm font-medium text-brand-black md:hidden">
+        <nav className="flex flex-col gap-1 border-t border-line bg-paper px-6 py-6 text-sm md:hidden">
           {NAV.map((item) => {
             const active = pathname === item.href;
             return (
               <Link
                 key={item.href}
                 href={item.href}
-                className={`rounded-md px-2 py-2 hover:bg-black/5 ${
-                  active ? "bg-black/5 text-brand-pink" : ""
-                }`}
+                className={`eyebrow py-3 ${active ? "text-accent" : "text-ink"}`}
                 onClick={() => setOpen(false)}
               >
                 {item.label}
@@ -107,7 +92,7 @@ export default function Header() {
           })}
           <Link
             href="/contact"
-            className="mt-2 rounded-full bg-brand-blue px-5 py-2 text-center font-semibold text-white"
+            className="eyebrow mt-3 border border-ink px-5 py-3 text-center text-ink transition-colors hover:border-brand-blue hover:bg-brand-blue hover:text-white"
             onClick={() => setOpen(false)}
           >
             Get a Quote

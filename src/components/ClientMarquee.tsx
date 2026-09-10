@@ -21,13 +21,13 @@ const CLIENTS = [
 
 function LogoBadge({ name, file, w, h }: { name: string; file: string; w: number; h: number }) {
   return (
-    <div className="flex h-24 w-40 shrink-0 items-center justify-center rounded-xl border border-black/10 bg-white p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+    <div className="flex h-20 w-44 shrink-0 items-center justify-center border-r border-line px-6 last:border-r-0">
       <Image
         src={`/images/clients/${file}`}
         alt={name}
         width={w}
         height={h}
-        className="max-h-16 w-auto object-contain"
+        className="max-h-12 w-auto object-contain opacity-90 transition-all duration-300 hover:opacity-100 hover:scale-105"
       />
     </div>
   );
@@ -37,8 +37,8 @@ export default function ClientMarquee() {
   const track = [...CLIENTS, ...CLIENTS];
 
   return (
-    <div className="relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
-      <div className="flex w-max animate-marquee gap-4 py-2">
+    <div className="relative overflow-hidden border-y border-line [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]">
+      <div className="flex w-max animate-marquee">
         {track.map((c, i) => (
           <LogoBadge key={`${c.name}-${i}`} {...c} />
         ))}

@@ -2,51 +2,43 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="bg-brand-black text-white">
-      <div className="mx-auto grid max-w-6xl gap-10 px-6 py-14 sm:grid-cols-3">
+    <footer className="bg-ink text-paper">
+      <div className="mx-auto grid max-w-7xl gap-12 px-6 py-16 sm:grid-cols-3 sm:px-10">
         <div>
-          <p className="text-lg font-bold">
-            <span className="text-brand-pink">Thee</span> Printing Hub
-          </p>
-          <p className="mt-2 text-sm italic text-brand-blue">
+          <p className="font-display text-2xl">Thee Printing Hub</p>
+          <p className="eyebrow mt-3 text-paper/50">
             Ink is our underlying foundation
           </p>
-          <div className="mt-4 flex gap-2">
-            <span className="h-4 w-4 rounded-sm bg-brand-blue" />
-            <span className="h-4 w-4 rounded-sm bg-brand-pink" />
-            <span className="h-4 w-4 rounded-sm bg-white" />
-            <span className="h-4 w-4 rounded-sm bg-brand-yellow" />
-          </div>
         </div>
 
-        <div className="text-sm text-white/80">
-          <p className="mb-3 font-semibold text-white">Quick Links</p>
+        <div className="text-sm text-paper/70">
+          <p className="eyebrow mb-4 text-paper">Sitemap</p>
           <ul className="space-y-2">
-            <li><Link href="/about" className="hover:text-brand-yellow">About Us</Link></li>
-            <li><Link href="/services" className="hover:text-brand-yellow">What We Do</Link></li>
-            <li><Link href="/catalogue" className="hover:text-brand-yellow">Catalogue</Link></li>
-            <li><Link href="/contact" className="hover:text-brand-yellow">Contact</Link></li>
+            <li><Link href="/about" className="link-reveal">About Us</Link></li>
+            <li><Link href="/services" className="link-reveal">Services</Link></li>
+            <li><Link href="/catalogue" className="link-reveal">Catalogue</Link></li>
+            <li><Link href="/contact" className="link-reveal">Contact</Link></li>
           </ul>
         </div>
 
-        <div className="text-sm text-white/80">
-          <p className="mb-3 font-semibold text-white">Contact</p>
+        <div className="text-sm text-paper/70">
+          <p className="eyebrow mb-4 text-paper">Contact</p>
           <ul className="space-y-2">
             <li>Latema Plaza, 3rd Floor, Room 302</li>
             <li>
-              <a href="tel:0748679132" className="hover:text-brand-yellow">
+              <a href="tel:0748679132" className="link-reveal">
                 0748 679 132
               </a>
             </li>
             <li>
-              <a href="mailto:theeprinting.hub@gmail.com" className="hover:text-brand-yellow">
+              <a href="mailto:theeprinting.hub@gmail.com" className="link-reveal">
                 theeprinting.hub@gmail.com
               </a>
             </li>
           </ul>
         </div>
       </div>
-      <div className="border-t border-white/10 px-6 py-4 text-center text-xs text-white/60">
+      <div className="border-t border-paper/10 px-6 py-6 text-center text-xs text-paper/40 sm:px-10">
         © {new Date().getFullYear()} Thee Printing Hub. All rights reserved.
       </div>
     </footer>

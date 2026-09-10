@@ -2,19 +2,18 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Reveal from "@/components/Reveal";
 import PhotoMasonry from "@/components/PhotoMasonry";
-import TornDivider from "@/components/TornDivider";
 import RegMark from "@/components/RegMark";
 
 export const metadata: Metadata = {
-  title: "What We Do | Thee Printing Hub",
+  title: "Services | Thee Printing Hub",
   description:
     "Office equipment, staff uniforms, general supplies, printing, and corporate identity services from Thee Printing Hub.",
 };
 
 const SECTIONS = [
   {
+    index: "01",
     title: "Office Equipment",
-    color: "border-brand-blue",
     image: "/images/office/office-stationery.png",
     desc: "We are dedicated to supplying high quality office equipment that meets the required business standards.",
     items: [
@@ -28,8 +27,8 @@ const SECTIONS = [
     ],
   },
   {
+    index: "02",
     title: "Staff Uniform",
-    color: "border-brand-pink",
     image: "/images/uniforms/uniform-chef-attire.png",
     desc: "We offer a wide range of staff uniforms customized to your specifications.",
     items: [
@@ -44,8 +43,8 @@ const SECTIONS = [
     ],
   },
   {
+    index: "03",
     title: "General Supplies & Printing",
-    color: "border-brand-yellow",
     image: "/images/gift-bags.jpg",
     desc: "Gift bags, banners, notebooks, bottles, caps, mugs, and promotional material branding that demands attention.",
     items: [
@@ -58,8 +57,8 @@ const SECTIONS = [
     ],
   },
   {
+    index: "04",
     title: "Corporate Identity",
-    color: "border-brand-black",
     image: "/images/roll-up-banner.jpg",
     desc: "Consistent, iconic branding collateral across every touchpoint of your business.",
     items: [
@@ -96,51 +95,54 @@ const UNIFORM_ITEMS = [
 export default function ServicesPage() {
   return (
     <div>
-      <section className="relative overflow-hidden bg-brand-blue py-16 text-white">
-        <Image
-          src="/images/branded-apparel.jpg"
-          alt="Branded apparel"
-          fill
-          className="object-cover opacity-20"
-        />
-        <div className="relative mx-auto max-w-6xl px-6">
-          <p className="flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-brand-yellow">
-            <RegMark className="h-4 w-4" />
+      <section className="grid border-b border-line md:grid-cols-[1fr_1.1fr]">
+        <div className="crop-corners relative min-h-[280px] md:min-h-0 md:order-2">
+          <Image
+            src="/images/branded-apparel.jpg"
+            alt="Branded apparel"
+            fill
+            className="object-cover"
+          />
+        </div>
+        <div className="flex flex-col justify-center px-6 py-16 sm:px-10 sm:py-24 md:order-1">
+          <p className="eyebrow flex items-center gap-2 text-ink-soft">
+            <RegMark className="h-4 w-4 text-brand-blue" />
             What We Do
           </p>
-          <h1 className="mt-2 text-4xl font-bold">Our Services</h1>
-          <p className="mt-3 max-w-2xl text-white/85">
+          <h1 className="font-display mt-4 text-5xl leading-tight text-ink sm:text-6xl">
+            Our Services
+          </h1>
+          <p className="mt-4 max-w-md text-ink-soft">
             Office Equipment · Staff Uniform · General Supplies · Printing ·
             Corporate Identity
           </p>
         </div>
-        <TornDivider color="#ffffff" className="absolute bottom-0 left-0" />
       </section>
 
-      <section className="bg-white py-16">
-        <div className="mx-auto grid max-w-6xl gap-8 px-6 sm:grid-cols-2">
+      <section className="px-6 py-20 sm:px-10 sm:py-28">
+        <div className="mx-auto grid max-w-7xl gap-8 sm:grid-cols-2 sm:gap-10">
           {SECTIONS.map((s, i) => (
-            <Reveal key={s.title} delay={i * 100}>
-              <div
-                className={`overflow-hidden rounded-2xl border-t-4 ${s.color} bg-zinc-50 shadow-sm transition-shadow hover:shadow-md`}
-              >
-                <div className="relative h-48 w-full bg-white">
+            <Reveal key={s.title} delay={i * 80}>
+              <div className="grid h-full grid-cols-[auto_1fr] gap-6 border border-line p-8">
+                <div className="relative h-24 w-24 shrink-0 bg-paper-deep">
                   <Image
                     src={s.image}
                     alt={s.title}
                     fill
-                    className="object-contain p-4"
+                    className="object-contain p-3"
                   />
                 </div>
-                <div className="p-8">
-                  <h2 className="text-2xl font-bold text-brand-black">{s.title}</h2>
-                  <p className="mt-2 text-sm text-black/70">{s.desc}</p>
-                  <ul className="mt-5 grid grid-cols-2 gap-2 text-sm text-black/80">
+                <div>
+                  <span className="font-display text-sm text-accent">
+                    {s.index}
+                  </span>
+                  <h2 className="font-display mt-1 text-2xl text-ink">
+                    {s.title}
+                  </h2>
+                  <p className="mt-2 text-sm text-ink-soft">{s.desc}</p>
+                  <ul className="mt-4 grid grid-cols-2 gap-1.5 text-sm text-ink-soft">
                     {s.items.map((item) => (
-                      <li key={item} className="flex items-start gap-2">
-                        <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-pink" />
-                        {item}
-                      </li>
+                      <li key={item}>{item}</li>
                     ))}
                   </ul>
                 </div>
@@ -150,27 +152,29 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <section className="bg-zinc-50 py-16">
-        <div className="mx-auto max-w-6xl px-6">
+      <section className="border-t border-line px-6 py-20 sm:px-10 sm:py-28">
+        <div className="mx-auto max-w-7xl">
           <Reveal>
-            <h2 className="text-2xl font-bold text-brand-black">
-              Office Equipment We Supply
+            <p className="eyebrow text-accent">Office Equipment</p>
+            <h2 className="font-display mt-3 text-4xl text-ink sm:text-5xl">
+              Everything for the Workplace
             </h2>
           </Reveal>
-          <div className="mt-8">
+          <div className="mt-12">
             <PhotoMasonry items={OFFICE_ITEMS} basePath="/images/office" />
           </div>
         </div>
       </section>
 
-      <section className="bg-white py-16">
-        <div className="mx-auto max-w-6xl px-6">
+      <section className="border-t border-line px-6 py-20 sm:px-10 sm:py-28">
+        <div className="mx-auto max-w-7xl">
           <Reveal>
-            <h2 className="text-2xl font-bold text-brand-black">
+            <p className="eyebrow text-accent">Staff Uniform</p>
+            <h2 className="font-display mt-3 text-4xl text-ink sm:text-5xl">
               Uniforms for Every Team
             </h2>
           </Reveal>
-          <div className="mt-8">
+          <div className="mt-12">
             <PhotoMasonry items={UNIFORM_ITEMS} basePath="/images/uniforms" />
           </div>
         </div>

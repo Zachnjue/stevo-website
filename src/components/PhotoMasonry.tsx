@@ -1,8 +1,6 @@
 import Image from "next/image";
 import Reveal from "@/components/Reveal";
 
-const ASPECTS = ["aspect-square", "aspect-[4/5]", "aspect-[4/3]", "aspect-square"];
-
 export default function PhotoMasonry({
   items,
   basePath,
@@ -13,30 +11,31 @@ export default function PhotoMasonry({
   fit?: "contain" | "cover";
 }) {
   return (
-    <div className="columns-2 gap-4 sm:columns-3 lg:columns-4">
+    <div className="grid grid-cols-2 gap-x-8 gap-y-14 sm:grid-cols-3 lg:grid-cols-4">
       {items.map((item, i) => (
         <Reveal
           key={`${item.name}-${i}`}
-          delay={(i % 4) * 80}
-          className="crop-corners relative mb-4 break-inside-avoid"
+          delay={(i % 4) * 60}
+          className="crop-corners relative"
         >
-          <div className="group overflow-hidden rounded-2xl border border-black/5 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
-            <div
-              className={`relative w-full bg-zinc-50 ${ASPECTS[i % ASPECTS.length]}`}
-            >
+          <div className="group">
+            <div className="relative aspect-square w-full overflow-hidden border border-line bg-paper-deep">
               <Image
                 src={`${basePath}/${item.file}`}
                 alt={item.name}
                 fill
                 className={
                   fit === "contain"
-                    ? "object-contain p-3 transition-transform duration-300 group-hover:scale-105"
-                    : "object-cover transition-transform duration-300 group-hover:scale-105"
+                    ? "object-contain p-6 transition-transform duration-500 group-hover:scale-105"
+                    : "object-cover transition-transform duration-500 group-hover:scale-105"
                 }
               />
             </div>
-            <p className="p-3 text-center text-sm font-medium text-black/80">
-              {item.name}
+            <p className="eyebrow mt-3 text-ink-soft">
+              <span className="text-brand-pink">
+                {String(i + 1).padStart(2, "0")}
+              </span>{" "}
+              — {item.name}
             </p>
           </div>
         </Reveal>
