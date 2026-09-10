@@ -1,43 +1,34 @@
+import Image from "next/image";
+
 const CLIENTS = [
-  { name: "Rainforest Alliance", color: "bg-emerald-600" },
-  { name: "Premier Airlines", color: "bg-indigo-600" },
-  { name: "Serene Health Connect", color: "bg-teal-600" },
-  { name: "Galooli", color: "bg-lime-600" },
-  { name: "Kencream Sacco", color: "bg-blue-600" },
-  { name: "NRG Radio", color: "bg-red-600" },
-  { name: "Halcyon Health Care Centre", color: "bg-green-600" },
-  { name: "Zero Malaria Campaign Coalition", color: "bg-orange-600" },
-  { name: "Don Bosco Aid", color: "bg-amber-600" },
-  { name: "Kenya Railways", color: "bg-red-700" },
-  { name: "Isuzu", color: "bg-red-600" },
-  { name: "Mayar", color: "bg-emerald-700" },
-  { name: "JustMarkets", color: "bg-blue-700" },
-  { name: "Crystal Gardens", color: "bg-green-600" },
-  { name: "The Custom Kiosk", color: "bg-zinc-700" },
-  { name: "Exquisite Expo Concepts", color: "bg-sky-600" },
+  { name: "Rainforest Alliance", file: "rainforest-alliance.png", w: 528, h: 158 },
+  { name: "Premier Airlines", file: "premier-airlines.png", w: 694, h: 119 },
+  { name: "Serene Health Connect", file: "serene-health-connect.png", w: 527, h: 213 },
+  { name: "Galooli", file: "galooli.png", w: 543, h: 174 },
+  { name: "Kencream Sacco", file: "kencream.png", w: 509, h: 342 },
+  { name: "NRG Radio", file: "nrg-radio.png", w: 239, h: 412 },
+  { name: "Halcyon Health Care Centre", file: "halcyon.png", w: 691, h: 178 },
+  { name: "Zero Malaria Campaign Coalition", file: "zero-malaria.png", w: 395, h: 204 },
+  { name: "Don Bosco Aid", file: "don-bosco-aid.png", w: 368, h: 310 },
+  { name: "Kenya Railways", file: "kenya-railways.png", w: 296, h: 240 },
+  { name: "Isuzu", file: "isuzu.png", w: 473, h: 96 },
+  { name: "Mayar", file: "mayar.png", w: 343, h: 287 },
+  { name: "JustMarkets", file: "justmarkets.png", w: 566, h: 95 },
+  { name: "Crystal Gardens", file: "crystal-gardens.png", w: 566, h: 214 },
+  { name: "The Custom Kiosk", file: "custom-kiosk.png", w: 403, h: 302 },
+  { name: "Exquisite Expo Concepts", file: "exquisite-expo.png", w: 391, h: 207 },
 ];
 
-function initials(name: string) {
-  return name
-    .split(" ")
-    .filter((w) => w[0] === w[0]?.toUpperCase())
-    .slice(0, 2)
-    .map((w) => w[0])
-    .join("")
-    .toUpperCase();
-}
-
-function LogoBadge({ name, color }: { name: string; color: string }) {
+function LogoBadge({ name, file, w, h }: { name: string; file: string; w: number; h: number }) {
   return (
-    <div className="flex shrink-0 items-center gap-3 rounded-full border border-black/10 bg-white px-5 py-3 shadow-sm">
-      <span
-        className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-xs font-bold text-white ${color}`}
-      >
-        {initials(name)}
-      </span>
-      <span className="whitespace-nowrap text-sm font-semibold text-brand-black">
-        {name}
-      </span>
+    <div className="flex h-24 w-40 shrink-0 items-center justify-center rounded-xl border border-black/10 bg-white p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+      <Image
+        src={`/images/clients/${file}`}
+        alt={name}
+        width={w}
+        height={h}
+        className="max-h-16 w-auto object-contain"
+      />
     </div>
   );
 }
@@ -49,7 +40,7 @@ export default function ClientMarquee() {
     <div className="relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
       <div className="flex w-max animate-marquee gap-4 py-2">
         {track.map((c, i) => (
-          <LogoBadge key={`${c.name}-${i}`} name={c.name} color={c.color} />
+          <LogoBadge key={`${c.name}-${i}`} {...c} />
         ))}
       </div>
     </div>

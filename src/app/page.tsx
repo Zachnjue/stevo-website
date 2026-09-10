@@ -1,13 +1,16 @@
 import Link from "next/link";
 import Image from "next/image";
 import ClientMarquee from "@/components/ClientMarquee";
+import VisionMissionValues from "@/components/VisionMissionValues";
+import Reveal from "@/components/Reveal";
+
+const FEATURED_SERVICE = {
+  title: "Corporate Identity",
+  desc: "Logos, brand collateral, signage, and printed materials that give your brand a consistent, iconic look across every touchpoint.",
+  image: "/images/roll-up-banner.jpg",
+};
 
 const SERVICES = [
-  {
-    title: "Corporate Identity",
-    desc: "Logos, brand collateral, and printed materials that give your brand a consistent, iconic look.",
-    image: "/images/roll-up-banner.jpg",
-  },
   {
     title: "Staff Uniform",
     desc: "Company, chef, school, sports, safety, and corporate uniforms customized to your specifications.",
@@ -54,13 +57,13 @@ export default function Home() {
             <div className="mt-8 flex flex-wrap gap-4">
               <Link
                 href="/contact"
-                className="rounded-full bg-brand-pink px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-pink-700"
+                className="rounded-full bg-brand-pink px-6 py-3 text-sm font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-pink-700 hover:shadow-lg"
               >
                 Get a Quote
               </Link>
               <Link
                 href="/catalogue"
-                className="rounded-full border border-white/40 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10"
+                className="rounded-full border border-white/40 px-6 py-3 text-sm font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-white/10"
               >
                 View Catalogue
               </Link>
@@ -89,82 +92,89 @@ export default function Home() {
       {/* What we do */}
       <section className="bg-brand-blue py-16 text-white">
         <div className="mx-auto max-w-6xl px-6">
-          <h2 className="text-3xl font-bold">What We Do</h2>
-          <p className="mt-2 max-w-2xl text-white/85">
-            From office equipment to staff uniforms, general supplies to full
-            corporate identity — we cover every touchpoint of your brand.
-          </p>
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {SERVICES.map((s) => (
-              <div
-                key={s.title}
-                className="group overflow-hidden rounded-2xl bg-white/10 backdrop-blur transition-colors hover:bg-white/20"
+          <Reveal>
+            <h2 className="text-3xl font-bold">What We Do</h2>
+            <p className="mt-2 max-w-2xl text-white/85">
+              From office equipment to staff uniforms, general supplies to
+              full corporate identity — we cover every touchpoint of your
+              brand.
+            </p>
+          </Reveal>
+
+          <div className="mt-10 grid gap-6 lg:grid-cols-3 lg:grid-rows-2">
+            <Reveal className="lg:col-span-2 lg:row-span-2">
+              <Link
+                href="/services"
+                className="group relative flex h-full min-h-[320px] flex-col justify-end overflow-hidden rounded-3xl"
               >
-                <div className="relative h-36 w-full overflow-hidden">
+                <Image
+                  src={FEATURED_SERVICE.image}
+                  alt={FEATURED_SERVICE.title}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
+                <div className="relative p-8">
+                  <span className="inline-block rounded-full bg-brand-yellow px-3 py-1 text-xs font-bold uppercase tracking-wide text-brand-black">
+                    Featured
+                  </span>
+                  <h3 className="mt-4 text-2xl font-bold">
+                    {FEATURED_SERVICE.title}
+                  </h3>
+                  <p className="mt-2 max-w-md text-sm text-white/85">
+                    {FEATURED_SERVICE.desc}
+                  </p>
+                </div>
+              </Link>
+            </Reveal>
+
+            {SERVICES.map((s, i) => (
+              <Reveal key={s.title} delay={i * 100}>
+                <div className="group relative flex h-full min-h-[150px] flex-col justify-end overflow-hidden rounded-2xl">
                   <Image
                     src={s.image}
                     alt={s.title}
                     fill
-                    className="object-cover transition-transform duration-300 group-hover:scale-105"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                  <div className="relative p-5">
+                    <h3 className="text-lg font-semibold">{s.title}</h3>
+                    <p className="mt-1 text-xs text-white/80">{s.desc}</p>
+                  </div>
                 </div>
-                <div className="p-6">
-                  <h3 className="text-lg font-semibold">{s.title}</h3>
-                  <p className="mt-2 text-sm text-white/80">{s.desc}</p>
-                </div>
-              </div>
+              </Reveal>
             ))}
           </div>
-          <div className="mt-10">
+
+          <Reveal className="mt-10">
             <Link
               href="/services"
-              className="inline-block rounded-full bg-white px-6 py-3 text-sm font-semibold text-brand-blue-dark hover:bg-white/90"
+              className="inline-block rounded-full bg-white px-6 py-3 text-sm font-semibold text-brand-blue-dark transition-all hover:-translate-y-0.5 hover:bg-white/90 hover:shadow-lg"
             >
               Explore All Services
             </Link>
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* Vision / Mission / Values */}
       <section className="bg-zinc-50 py-16">
         <div className="mx-auto max-w-6xl px-6">
-          <div className="grid gap-6 sm:grid-cols-3">
-            <div className="rounded-2xl border-t-4 border-brand-pink bg-white p-6 shadow-sm">
-              <h3 className="text-xl font-bold text-brand-black">Our Vision</h3>
-              <p className="mt-3 text-sm text-black/70">
-                To provide exceptional quality services and products to our
-                clients, improving lives and becoming the world&apos;s most
-                reliable branding agency.
-              </p>
-            </div>
-            <div className="rounded-2xl border-t-4 border-brand-yellow bg-white p-6 shadow-sm">
-              <h3 className="text-xl font-bold text-brand-black">Our Mission</h3>
-              <p className="mt-3 text-sm text-black/70">
-                Pace-setters for the industry in world-class product
-                development that cares for the environment, empowering
-                brands to build loyalty and advocacy.
-              </p>
-            </div>
-            <div className="rounded-2xl border-t-4 border-brand-blue bg-white p-6 shadow-sm">
-              <h3 className="text-xl font-bold text-brand-black">Core Values</h3>
-              <ul className="mt-3 space-y-1 text-sm text-black/70">
-                <li>Innovation</li>
-                <li>Creativity</li>
-                <li>Integrity</li>
-                <li>Professionalism</li>
-              </ul>
-            </div>
-          </div>
+          <Reveal>
+            <VisionMissionValues />
+          </Reveal>
         </div>
       </section>
 
       {/* Clients */}
-      <section className="bg-white py-16">
+      <section className="bg-dot-grid bg-white py-16">
         <div className="mx-auto max-w-6xl px-6">
-          <h2 className="text-center text-2xl font-bold text-brand-black">
-            Trusted by Leading Brands
-          </h2>
+          <Reveal>
+            <h2 className="text-center text-2xl font-bold text-brand-black">
+              Trusted by Leading Brands
+            </h2>
+          </Reveal>
         </div>
         <div className="mt-8">
           <ClientMarquee />
@@ -179,7 +189,7 @@ export default function Home() {
           fill
           className="object-cover opacity-25"
         />
-        <div className="relative mx-auto max-w-3xl px-6">
+        <Reveal className="relative mx-auto max-w-3xl px-6">
           <h2 className="text-3xl font-bold">
             Ready to give your brand an iconic look?
           </h2>
@@ -189,11 +199,11 @@ export default function Home() {
           </p>
           <Link
             href="/contact"
-            className="mt-6 inline-block rounded-full bg-white px-8 py-3 text-sm font-semibold text-brand-pink hover:bg-white/90"
+            className="mt-6 inline-block rounded-full bg-white px-8 py-3 text-sm font-semibold text-brand-pink transition-all hover:-translate-y-0.5 hover:bg-white/90 hover:shadow-lg"
           >
             Contact Us
           </Link>
-        </div>
+        </Reveal>
       </section>
     </div>
   );

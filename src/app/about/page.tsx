@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import VisionMissionValues from "@/components/VisionMissionValues";
+import Reveal from "@/components/Reveal";
 
 export const metadata: Metadata = {
   title: "About Us | Thee Printing Hub",
@@ -27,7 +29,7 @@ export default function AboutPage() {
 
       <section className="bg-white py-16">
         <div className="mx-auto grid max-w-6xl gap-10 px-6 md:grid-cols-2 md:items-center">
-          <div className="text-lg leading-relaxed text-black/80">
+          <Reveal className="text-lg leading-relaxed text-black/80">
             <p>
               Thee Printing Hub is a vibrant, dynamic below-the-line company
               dealing with branding and printing. We formulate traction and
@@ -41,46 +43,26 @@ export default function AboutPage() {
               promotional material branding, staff uniforms, corporate
               identity, office equipment, and general supplies.
             </p>
-          </div>
-          <div className="relative h-72 w-full overflow-hidden rounded-3xl sm:h-96">
+          </Reveal>
+          <Reveal
+            delay={150}
+            className="relative h-72 w-full overflow-hidden rounded-3xl sm:h-96"
+          >
             <Image
               src="/images/gift-bags.jpg"
               alt="Branded gift bags and promotional items"
               fill
               className="object-cover"
             />
-          </div>
+          </Reveal>
         </div>
       </section>
 
       <section className="bg-zinc-50 py-16">
-        <div className="mx-auto grid max-w-6xl gap-6 px-6 sm:grid-cols-3">
-          <div className="rounded-2xl border-t-4 border-brand-pink bg-white p-6 shadow-sm">
-            <h2 className="text-xl font-bold text-brand-black">Our Vision</h2>
-            <p className="mt-3 text-sm text-black/70">
-              To provide exceptional quality services and products to our
-              clients, improving lives and becoming the world&apos;s most
-              reliable branding agency.
-            </p>
-          </div>
-          <div className="rounded-2xl border-t-4 border-brand-yellow bg-white p-6 shadow-sm">
-            <h2 className="text-xl font-bold text-brand-black">Our Mission</h2>
-            <p className="mt-3 text-sm text-black/70">
-              Pace-setter for the industry in providing world-class product
-              development by caring for the environment. To empower brands
-              to make connections that strengthen the loyalty, conviction,
-              and advocacy of consumers.
-            </p>
-          </div>
-          <div className="rounded-2xl border-t-4 border-brand-blue bg-white p-6 shadow-sm">
-            <h2 className="text-xl font-bold text-brand-black">Core Values</h2>
-            <ul className="mt-3 space-y-2 text-sm text-black/70">
-              <li>Innovation</li>
-              <li>Creativity</li>
-              <li>Integrity</li>
-              <li>Professionalism</li>
-            </ul>
-          </div>
+        <div className="mx-auto max-w-6xl px-6">
+          <Reveal>
+            <VisionMissionValues />
+          </Reveal>
         </div>
       </section>
     </div>

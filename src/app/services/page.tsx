@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Reveal from "@/components/Reveal";
+import PhotoMasonry from "@/components/PhotoMasonry";
 
 export const metadata: Metadata = {
   title: "What We Do | Thee Printing Hub",
@@ -11,7 +13,7 @@ const SECTIONS = [
   {
     title: "Office Equipment",
     color: "border-brand-blue",
-    image: "/images/office-supplies.jpg",
+    image: "/images/office/office-stationery.png",
     desc: "We are dedicated to supplying high quality office equipment that meets the required business standards.",
     items: [
       "Office Stationeries",
@@ -26,7 +28,7 @@ const SECTIONS = [
   {
     title: "Staff Uniform",
     color: "border-brand-pink",
-    image: "/images/chef-uniform.jpg",
+    image: "/images/uniforms/uniform-chef-attire.png",
     desc: "We offer a wide range of staff uniforms customized to your specifications.",
     items: [
       "Company Staff Uniforms",
@@ -67,6 +69,28 @@ const SECTIONS = [
   },
 ];
 
+const OFFICE_ITEMS = [
+  { name: "Office Stationery", file: "office-stationery.png" },
+  { name: "Pens", file: "office-pens.png" },
+  { name: "Phone/Desk Stand", file: "office-phone-stand.png" },
+  { name: "Printers", file: "office-printer.png" },
+  { name: "Photocopy Paper", file: "office-paper.png" },
+  { name: "Sticky Notes", file: "office-sticky-notes.png" },
+  { name: "Computer Desktops", file: "office-desktop.png" },
+];
+
+const UNIFORM_ITEMS = [
+  { name: "Company Staff Uniform", file: "uniform-company-staff.png" },
+  { name: "Chef Attire", file: "uniform-chef-attire.png" },
+  { name: "Chef Kit", file: "uniform-chef-kit.png" },
+  { name: "School Uniform", file: "uniform-school.png" },
+  { name: "Sports Uniform", file: "uniform-sports.png" },
+  { name: "Sport Shoes", file: "uniform-sport-shoes.png" },
+  { name: "Safety Apparel", file: "uniform-safety.png" },
+  { name: "Corporate Uniform", file: "uniform-corporate.png" },
+  { name: "Nurse Staff Uniform", file: "uniform-nurse.png" },
+];
+
 export default function ServicesPage() {
   return (
     <div>
@@ -91,61 +115,59 @@ export default function ServicesPage() {
 
       <section className="bg-white py-16">
         <div className="mx-auto grid max-w-6xl gap-8 px-6 sm:grid-cols-2">
-          {SECTIONS.map((s) => (
-            <div
-              key={s.title}
-              className={`overflow-hidden rounded-2xl border-t-4 ${s.color} bg-zinc-50 shadow-sm`}
-            >
-              <div className="relative h-48 w-full">
-                <Image src={s.image} alt={s.title} fill className="object-cover" />
+          {SECTIONS.map((s, i) => (
+            <Reveal key={s.title} delay={i * 100}>
+              <div
+                className={`overflow-hidden rounded-2xl border-t-4 ${s.color} bg-zinc-50 shadow-sm transition-shadow hover:shadow-md`}
+              >
+                <div className="relative h-48 w-full bg-white">
+                  <Image
+                    src={s.image}
+                    alt={s.title}
+                    fill
+                    className="object-contain p-4"
+                  />
+                </div>
+                <div className="p-8">
+                  <h2 className="text-2xl font-bold text-brand-black">{s.title}</h2>
+                  <p className="mt-2 text-sm text-black/70">{s.desc}</p>
+                  <ul className="mt-5 grid grid-cols-2 gap-2 text-sm text-black/80">
+                    {s.items.map((item) => (
+                      <li key={item} className="flex items-start gap-2">
+                        <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-pink" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
-              <div className="p-8">
-                <h2 className="text-2xl font-bold text-brand-black">{s.title}</h2>
-                <p className="mt-2 text-sm text-black/70">{s.desc}</p>
-                <ul className="mt-5 grid grid-cols-2 gap-2 text-sm text-black/80">
-                  {s.items.map((item) => (
-                    <li key={item} className="flex items-start gap-2">
-                      <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-pink" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
+            </Reveal>
           ))}
         </div>
       </section>
 
       <section className="bg-zinc-50 py-16">
         <div className="mx-auto max-w-6xl px-6">
-          <h2 className="text-2xl font-bold text-brand-black">
-            Uniforms for Every Team
-          </h2>
-          <div className="mt-8 grid gap-4 sm:grid-cols-3">
-            <div className="relative h-48 overflow-hidden rounded-2xl">
-              <Image
-                src="/images/chef-uniform.jpg"
-                alt="Chef uniforms in a professional kitchen"
-                fill
-                className="object-cover"
-              />
-            </div>
-            <div className="relative h-48 overflow-hidden rounded-2xl">
-              <Image
-                src="/images/school-uniform.jpg"
-                alt="Students in school uniforms"
-                fill
-                className="object-cover"
-              />
-            </div>
-            <div className="relative h-48 overflow-hidden rounded-2xl">
-              <Image
-                src="/images/safety-apparel.jpg"
-                alt="Workers in high-visibility safety apparel"
-                fill
-                className="object-cover"
-              />
-            </div>
+          <Reveal>
+            <h2 className="text-2xl font-bold text-brand-black">
+              Office Equipment We Supply
+            </h2>
+          </Reveal>
+          <div className="mt-8">
+            <PhotoMasonry items={OFFICE_ITEMS} basePath="/images/office" />
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white py-16">
+        <div className="mx-auto max-w-6xl px-6">
+          <Reveal>
+            <h2 className="text-2xl font-bold text-brand-black">
+              Uniforms for Every Team
+            </h2>
+          </Reveal>
+          <div className="mt-8">
+            <PhotoMasonry items={UNIFORM_ITEMS} basePath="/images/uniforms" />
           </div>
         </div>
       </section>
