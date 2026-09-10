@@ -1,69 +1,200 @@
+import Link from "next/link";
 import Image from "next/image";
+import ClientMarquee from "@/components/ClientMarquee";
+
+const SERVICES = [
+  {
+    title: "Corporate Identity",
+    desc: "Logos, brand collateral, and printed materials that give your brand a consistent, iconic look.",
+    image: "/images/roll-up-banner.jpg",
+  },
+  {
+    title: "Staff Uniform",
+    desc: "Company, chef, school, sports, safety, and corporate uniforms customized to your specifications.",
+    image: "/images/chef-uniform.jpg",
+  },
+  {
+    title: "Printing",
+    desc: "Gift bags, banners, notebooks, and promotional material branding that demands attention.",
+    image: "/images/gift-bags.jpg",
+  },
+  {
+    title: "Office Equipment",
+    desc: "Stationery, printers, photocopy paper, desktops, and general supplies for your workplace.",
+    image: "/images/office-supplies.jpg",
+  },
+];
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
+    <div className="flex flex-col">
+      {/* Hero */}
+      <section className="relative overflow-hidden bg-brand-black">
         <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
+          src="/images/printing-press.jpg"
+          alt="Printing press running a large print job"
+          fill
           priority
+          className="object-cover opacity-40"
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+        <div className="relative mx-auto grid max-w-6xl gap-10 px-6 py-20 sm:py-28 md:grid-cols-2 md:items-center">
+          <div>
+            <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-brand-yellow">
+              Ink is our underlying foundation
+            </p>
+            <h1 className="text-4xl font-bold leading-tight text-white sm:text-5xl">
+              Branding &amp; Printing that make brands{" "}
+              <span className="text-brand-blue">iconic.</span>
+            </h1>
+            <p className="mt-5 max-w-md text-lg text-white/80">
+              Thee Printing Hub is a vibrant, dynamic below-the-line company
+              helping brands reach iconic status with materials that stand
+              out and demand attention.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-4">
+              <Link
+                href="/contact"
+                className="rounded-full bg-brand-pink px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-pink-700"
+              >
+                Get a Quote
+              </Link>
+              <Link
+                href="/catalogue"
+                className="rounded-full border border-white/40 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10"
+              >
+                View Catalogue
+              </Link>
+            </div>
+          </div>
+
+          <div className="relative h-64 w-full overflow-hidden rounded-3xl sm:h-80">
             <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
+              src="/images/branded-apparel.jpg"
+              alt="Stack of folded branded apparel"
+              fill
+              className="object-cover"
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            <div className="absolute bottom-6 left-6 right-6 rounded-2xl bg-white/95 p-6 shadow-lg">
+              <p className="text-sm font-semibold text-brand-black">
+                Trusted by 15+ leading brands
+              </p>
+              <p className="mt-1 text-xs text-black/60">
+                Gift bags · Uniforms · Corporate identity · Promotional merch
+              </p>
+            </div>
+          </div>
         </div>
-      </main>
+      </section>
+
+      {/* What we do */}
+      <section className="bg-brand-blue py-16 text-white">
+        <div className="mx-auto max-w-6xl px-6">
+          <h2 className="text-3xl font-bold">What We Do</h2>
+          <p className="mt-2 max-w-2xl text-white/85">
+            From office equipment to staff uniforms, general supplies to full
+            corporate identity — we cover every touchpoint of your brand.
+          </p>
+          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {SERVICES.map((s) => (
+              <div
+                key={s.title}
+                className="group overflow-hidden rounded-2xl bg-white/10 backdrop-blur transition-colors hover:bg-white/20"
+              >
+                <div className="relative h-36 w-full overflow-hidden">
+                  <Image
+                    src={s.image}
+                    alt={s.title}
+                    fill
+                    className="object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                </div>
+                <div className="p-6">
+                  <h3 className="text-lg font-semibold">{s.title}</h3>
+                  <p className="mt-2 text-sm text-white/80">{s.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="mt-10">
+            <Link
+              href="/services"
+              className="inline-block rounded-full bg-white px-6 py-3 text-sm font-semibold text-brand-blue-dark hover:bg-white/90"
+            >
+              Explore All Services
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Vision / Mission / Values */}
+      <section className="bg-zinc-50 py-16">
+        <div className="mx-auto max-w-6xl px-6">
+          <div className="grid gap-6 sm:grid-cols-3">
+            <div className="rounded-2xl border-t-4 border-brand-pink bg-white p-6 shadow-sm">
+              <h3 className="text-xl font-bold text-brand-black">Our Vision</h3>
+              <p className="mt-3 text-sm text-black/70">
+                To provide exceptional quality services and products to our
+                clients, improving lives and becoming the world&apos;s most
+                reliable branding agency.
+              </p>
+            </div>
+            <div className="rounded-2xl border-t-4 border-brand-yellow bg-white p-6 shadow-sm">
+              <h3 className="text-xl font-bold text-brand-black">Our Mission</h3>
+              <p className="mt-3 text-sm text-black/70">
+                Pace-setters for the industry in world-class product
+                development that cares for the environment, empowering
+                brands to build loyalty and advocacy.
+              </p>
+            </div>
+            <div className="rounded-2xl border-t-4 border-brand-blue bg-white p-6 shadow-sm">
+              <h3 className="text-xl font-bold text-brand-black">Core Values</h3>
+              <ul className="mt-3 space-y-1 text-sm text-black/70">
+                <li>Innovation</li>
+                <li>Creativity</li>
+                <li>Integrity</li>
+                <li>Professionalism</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Clients */}
+      <section className="bg-white py-16">
+        <div className="mx-auto max-w-6xl px-6">
+          <h2 className="text-center text-2xl font-bold text-brand-black">
+            Trusted by Leading Brands
+          </h2>
+        </div>
+        <div className="mt-8">
+          <ClientMarquee />
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="relative overflow-hidden bg-brand-pink py-14 text-center text-white">
+        <Image
+          src="/images/school-uniform.jpg"
+          alt="Students in branded school uniforms"
+          fill
+          className="object-cover opacity-25"
+        />
+        <div className="relative mx-auto max-w-3xl px-6">
+          <h2 className="text-3xl font-bold">
+            Ready to give your brand an iconic look?
+          </h2>
+          <p className="mt-3 text-white/90">
+            Talk to us about your next print run, uniform order, or branding
+            campaign.
+          </p>
+          <Link
+            href="/contact"
+            className="mt-6 inline-block rounded-full bg-white px-8 py-3 text-sm font-semibold text-brand-pink hover:bg-white/90"
+          >
+            Contact Us
+          </Link>
+        </div>
+      </section>
     </div>
   );
 }
