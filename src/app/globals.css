@@ -60,3 +60,91 @@ body {
   background-image: radial-gradient(circle, rgba(255, 255, 255, 0.18) 1px, transparent 1px);
   background-size: 22px 22px;
 }
+
+/* Print-misregistration headline effect: offset color channels like a
+   misaligned press run. */
+.text-misprint {
+  position: relative;
+  display: inline-block;
+}
+
+.text-misprint::before,
+.text-misprint::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: -1;
+}
+
+.text-misprint::before {
+  color: var(--brand-blue);
+  transform: translate(2px, 1px);
+  opacity: 0.55;
+}
+
+.text-misprint::after {
+  color: var(--brand-pink);
+  transform: translate(-2px, -1px);
+  opacity: 0.55;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .text-misprint::before,
+  .text-misprint::after {
+    display: none;
+  }
+}
+
+/* Halftone dot texture, like a coarse print screen */
+.bg-halftone {
+  background-image: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.35) 1.5px,
+    transparent 1.6px
+  );
+  background-size: 10px 10px;
+}
+
+/* Corner crop/registration marks revealed on hover */
+.crop-corners {
+  position: relative;
+}
+
+.crop-corners::before,
+.crop-corners::after,
+.crop-corners > .crop-tl,
+.crop-corners > .crop-br {
+  pointer-events: none;
+}
+
+.crop-corners::before,
+.crop-corners::after {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  z-index: 20;
+}
+
+.crop-corners::before {
+  top: -6px;
+  left: -6px;
+  border-top: 2px solid var(--brand-pink);
+  border-left: 2px solid var(--brand-pink);
+}
+
+.crop-corners::after {
+  bottom: -6px;
+  right: -6px;
+  border-bottom: 2px solid var(--brand-pink);
+  border-right: 2px solid var(--brand-pink);
+}
+
+.crop-corners:hover::before,
+.crop-corners:hover::after {
+  opacity: 1;
+}

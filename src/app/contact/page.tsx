@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Reveal from "@/components/Reveal";
+import TornDivider from "@/components/TornDivider";
+import RegMark from "@/components/RegMark";
 
 export const metadata: Metadata = {
   title: "Contact Us | Thee Printing Hub",
@@ -10,9 +12,10 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <div>
-      <section className="bg-brand-blue py-16 text-white">
-        <div className="mx-auto max-w-6xl px-6">
-          <p className="text-sm font-semibold uppercase tracking-widest text-brand-yellow">
+      <section className="relative overflow-hidden bg-brand-blue py-16 text-white">
+        <div className="relative mx-auto max-w-6xl px-6">
+          <p className="flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-brand-yellow">
+            <RegMark className="h-4 w-4" />
             Contact Us
           </p>
           <h1 className="mt-2 text-4xl font-bold">Let&apos;s Talk</h1>
@@ -20,6 +23,7 @@ export default function ContactPage() {
             Reach out for quotes, custom orders, or general enquiries.
           </p>
         </div>
+        <TornDivider color="#ffffff" className="absolute bottom-0 left-0" />
       </section>
 
       <section className="bg-dot-grid bg-white py-16">

@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Reveal from "@/components/Reveal";
 import PhotoMasonry from "@/components/PhotoMasonry";
+import TornDivider from "@/components/TornDivider";
+import RegMark from "@/components/RegMark";
 
 export const metadata: Metadata = {
   title: "Catalogue | Thee Printing Hub",
@@ -38,7 +39,8 @@ export default function CataloguePage() {
           className="object-cover opacity-30"
         />
         <div className="relative mx-auto max-w-6xl px-6">
-          <p className="text-sm font-semibold uppercase tracking-widest text-brand-yellow">
+          <p className="flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-brand-yellow">
+            <RegMark className="h-4 w-4" />
             Catalogue
           </p>
           <h1 className="mt-2 text-4xl font-bold">A Sample of Our Work</h1>
@@ -48,6 +50,7 @@ export default function CataloguePage() {
             quotes.
           </p>
         </div>
+        <TornDivider color="#ffffff" className="absolute bottom-0 left-0" />
       </section>
 
       <section className="bg-dot-grid bg-white py-16">

@@ -18,7 +18,7 @@ export default function PhotoMasonry({
         <Reveal
           key={`${item.name}-${i}`}
           delay={(i % 4) * 80}
-          className="mb-4 break-inside-avoid"
+          className="crop-corners relative mb-4 break-inside-avoid"
         >
           <div className="group overflow-hidden rounded-2xl border border-black/5 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
             <div

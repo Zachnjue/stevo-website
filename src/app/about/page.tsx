@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import VisionMissionValues from "@/components/VisionMissionValues";
 import Reveal from "@/components/Reveal";
+import TornDivider from "@/components/TornDivider";
+import RegMark from "@/components/RegMark";
 
 export const metadata: Metadata = {
   title: "About Us | Thee Printing Hub",
@@ -20,11 +22,13 @@ export default function AboutPage() {
           className="object-cover opacity-25"
         />
         <div className="relative mx-auto max-w-6xl px-6">
-          <p className="text-sm font-semibold uppercase tracking-widest text-brand-yellow">
+          <p className="flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-brand-yellow">
+            <RegMark className="h-4 w-4" />
             About Us
           </p>
           <h1 className="mt-2 text-4xl font-bold">Who We Are</h1>
         </div>
+        <TornDivider color="#ffffff" className="absolute bottom-0 left-0" />
       </section>
 
       <section className="bg-white py-16">
@@ -46,19 +50,21 @@ export default function AboutPage() {
           </Reveal>
           <Reveal
             delay={150}
-            className="relative h-72 w-full overflow-hidden rounded-3xl sm:h-96"
+            className="crop-corners relative h-72 w-full rounded-3xl sm:h-96"
           >
-            <Image
-              src="/images/gift-bags.jpg"
-              alt="Branded gift bags and promotional items"
-              fill
-              className="object-cover"
-            />
+            <div className="absolute inset-0 overflow-hidden rounded-3xl">
+              <Image
+                src="/images/gift-bags.jpg"
+                alt="Branded gift bags and promotional items"
+                fill
+                className="object-cover"
+              />
+            </div>
           </Reveal>
         </div>
       </section>
 
-      <section className="bg-zinc-50 py-16">
+      <section className="relative overflow-hidden bg-zinc-50 py-16">
         <div className="mx-auto max-w-6xl px-6">
           <Reveal>
             <VisionMissionValues />

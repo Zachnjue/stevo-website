@@ -3,6 +3,10 @@ import Image from "next/image";
 import ClientMarquee from "@/components/ClientMarquee";
 import VisionMissionValues from "@/components/VisionMissionValues";
 import Reveal from "@/components/Reveal";
+import TornDivider from "@/components/TornDivider";
+import RegMark from "@/components/RegMark";
+import InkDots from "@/components/InkDots";
+import Misprint from "@/components/Misprint";
 
 const FEATURED_SERVICE = {
   title: "Corporate Identity",
@@ -40,13 +44,15 @@ export default function Home() {
           priority
           className="object-cover opacity-40"
         />
+        <InkDots className="absolute -top-4 right-6 hidden sm:block" />
         <div className="relative mx-auto grid max-w-6xl gap-10 px-6 py-20 sm:py-28 md:grid-cols-2 md:items-center">
           <div>
-            <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-brand-yellow">
+            <p className="mb-3 flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-brand-yellow">
+              <RegMark className="h-4 w-4" color="currentColor" />
               Ink is our underlying foundation
             </p>
             <h1 className="text-4xl font-bold leading-tight text-white sm:text-5xl">
-              Branding &amp; Printing that make brands{" "}
+              <Misprint>Branding &amp; Printing</Misprint> that make brands{" "}
               <span className="text-brand-blue">iconic.</span>
             </h1>
             <p className="mt-5 max-w-md text-lg text-white/80">
@@ -70,13 +76,15 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="relative h-64 w-full overflow-hidden rounded-3xl sm:h-80">
-            <Image
-              src="/images/branded-apparel.jpg"
-              alt="Stack of folded branded apparel"
-              fill
-              className="object-cover"
-            />
+          <div className="crop-corners relative h-64 w-full rounded-3xl sm:h-80">
+            <div className="absolute inset-0 overflow-hidden rounded-3xl">
+              <Image
+                src="/images/branded-apparel.jpg"
+                alt="Stack of folded branded apparel"
+                fill
+                className="object-cover"
+              />
+            </div>
             <div className="absolute bottom-6 left-6 right-6 rounded-2xl bg-white/95 p-6 shadow-lg">
               <p className="text-sm font-semibold text-brand-black">
                 Trusted by 15+ leading brands
@@ -87,10 +95,14 @@ export default function Home() {
             </div>
           </div>
         </div>
+        <TornDivider
+          color="var(--brand-blue)"
+          className="absolute bottom-0 left-0"
+        />
       </section>
 
       {/* What we do */}
-      <section className="bg-brand-blue py-16 text-white">
+      <section className="relative overflow-hidden bg-brand-blue py-16 text-white">
         <div className="mx-auto max-w-6xl px-6">
           <Reveal>
             <h2 className="text-3xl font-bold">What We Do</h2>
@@ -102,7 +114,7 @@ export default function Home() {
           </Reveal>
 
           <div className="mt-10 grid gap-6 lg:grid-cols-3 lg:grid-rows-2">
-            <Reveal className="lg:col-span-2 lg:row-span-2">
+            <Reveal className="crop-corners relative lg:col-span-2 lg:row-span-2">
               <Link
                 href="/services"
                 className="group relative flex h-full min-h-[320px] flex-col justify-end overflow-hidden rounded-3xl"
@@ -129,7 +141,7 @@ export default function Home() {
             </Reveal>
 
             {SERVICES.map((s, i) => (
-              <Reveal key={s.title} delay={i * 100}>
+              <Reveal key={s.title} delay={i * 100} className="crop-corners relative">
                 <div className="group relative flex h-full min-h-[150px] flex-col justify-end overflow-hidden rounded-2xl">
                   <Image
                     src={s.image}
@@ -156,19 +168,21 @@ export default function Home() {
             </Link>
           </Reveal>
         </div>
+        <TornDivider color="#fafafa" className="absolute bottom-0 left-0" />
       </section>
 
       {/* Vision / Mission / Values */}
-      <section className="bg-zinc-50 py-16">
+      <section className="relative overflow-hidden bg-zinc-50 py-16">
         <div className="mx-auto max-w-6xl px-6">
           <Reveal>
             <VisionMissionValues />
           </Reveal>
         </div>
+        <TornDivider color="#ffffff" className="absolute bottom-0 left-0" />
       </section>
 
       {/* Clients */}
-      <section className="bg-dot-grid bg-white py-16">
+      <section className="relative overflow-hidden bg-dot-grid bg-white py-16">
         <div className="mx-auto max-w-6xl px-6">
           <Reveal>
             <h2 className="text-center text-2xl font-bold text-brand-black">
@@ -179,6 +193,10 @@ export default function Home() {
         <div className="mt-8">
           <ClientMarquee />
         </div>
+        <TornDivider
+          color="var(--brand-pink)"
+          className="absolute bottom-0 left-0"
+        />
       </section>
 
       {/* CTA */}
@@ -204,6 +222,7 @@ export default function Home() {
             Contact Us
           </Link>
         </Reveal>
+        <TornDivider color="#17181a" className="absolute bottom-0 left-0" />
       </section>
     </div>
   );
