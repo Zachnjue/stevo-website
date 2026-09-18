@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Reveal from "@/components/Reveal";
 import RegMark from "@/components/RegMark";
+import ContactForm from "@/components/ContactForm";
 
 export const metadata: Metadata = {
   title: "Contact Us | Thee Printing Hub",
@@ -59,51 +60,7 @@ export default function ContactPage() {
 
           <Reveal delay={150}>
             <p className="eyebrow text-accent">Send a Message</p>
-            <form
-              action="mailto:theeprinting.hub@gmail.com"
-              method="post"
-              encType="text/plain"
-              className="mt-8 flex flex-col gap-6"
-            >
-              <div>
-                <label className="eyebrow mb-2 block text-ink-soft">
-                  Name
-                </label>
-                <input
-                  name="name"
-                  required
-                  className="w-full border-0 border-b border-line bg-transparent py-2 text-ink transition-colors focus:border-brand-blue focus:outline-none"
-                />
-              </div>
-              <div>
-                <label className="eyebrow mb-2 block text-ink-soft">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  required
-                  className="w-full border-0 border-b border-line bg-transparent py-2 text-ink transition-colors focus:border-brand-blue focus:outline-none"
-                />
-              </div>
-              <div>
-                <label className="eyebrow mb-2 block text-ink-soft">
-                  Message
-                </label>
-                <textarea
-                  name="message"
-                  rows={4}
-                  required
-                  className="w-full border-0 border-b border-line bg-transparent py-2 text-ink transition-colors focus:border-brand-blue focus:outline-none"
-                />
-              </div>
-              <button
-                type="submit"
-                className="eyebrow mt-2 self-start border border-ink px-7 py-3.5 text-ink transition-colors hover:border-brand-blue hover:bg-brand-blue hover:text-white"
-              >
-                Send Message
-              </button>
-            </form>
+            <ContactForm />
           </Reveal>
         </div>
       </section>

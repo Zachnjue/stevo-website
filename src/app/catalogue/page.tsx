@@ -54,11 +54,17 @@ export default async function CataloguePage() {
 
         const masonryItems = categoryItems.map((item) => {
           if (item.image_path?.startsWith(LOCAL_PREFIX)) {
-            return {
-              name: item.name,
-              file: item.image_path.slice(LOCAL_PREFIX.length),
-              fit: item.fit as "contain" | "cover",
-            };
+            const localPath = item.image_path.slice(LOCAL_PREFIX.length);
+            // A path starting with "/" is already a full public path (e.g.
+            // seeded from another section's images) — use it as-is instead
+            // of joining it under the catalogue's own image folder.
+            return localPath.startsWith("/")
+              ? { name: item.name, url: localPath, fit: item.fit as "contain" | "cover" }
+              : {
+                  name: item.name,
+                  file: localPath,
+                  fit: item.fit as "contain" | "cover",
+                };
           }
           if (item.image_path) {
             const {

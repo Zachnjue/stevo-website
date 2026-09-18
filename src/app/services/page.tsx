@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import Reveal from "@/components/Reveal";
-import PhotoMasonry from "@/components/PhotoMasonry";
 import RegMark from "@/components/RegMark";
 
 export const metadata: Metadata = {
@@ -16,80 +16,33 @@ const SECTIONS = [
     title: "Office Equipment",
     image: "/images/office/office-stationery.png",
     desc: "We are dedicated to supplying high quality office equipment that meets the required business standards.",
-    items: [
-      "Office Stationeries",
-      "Printers",
-      "Photocopy Papers",
-      "Gift Sets",
-      "Notebooks",
-      "Sticky Notes",
-      "Computer Desktops",
-    ],
+    seeMore: "Browse the catalogue",
+    seeMoreHref: "/catalogue",
   },
   {
     index: "02",
     title: "Staff Uniform",
     image: "/images/uniforms/uniform-chef-attire.png",
     desc: "We offer a wide range of staff uniforms customized to your specifications.",
-    items: [
-      "Company Staff Uniforms",
-      "Chef Attire",
-      "School Uniforms",
-      "Sports Uniforms",
-      "Sport Shoes",
-      "Safety Apparel",
-      "Corporate Uniforms",
-      "Nurse Staff Uniforms",
-    ],
+    seeMore: "Browse the catalogue",
+    seeMoreHref: "/catalogue",
   },
   {
     index: "03",
     title: "General Supplies & Printing",
     image: "/images/gift-bags.jpg",
     desc: "Gift bags, banners, notebooks, bottles, caps, mugs, and promotional material branding that demands attention.",
-    items: [
-      "Gift Bags",
-      "Promotional Merchandise",
-      "Branded Notebooks & Diaries",
-      "Banners & Roll-up Stands",
-      "Branded Apparel & Caps",
-      "Branded Bottles & Mugs",
-    ],
+    seeMore: "Browse the catalogue",
+    seeMoreHref: "/catalogue",
   },
   {
     index: "04",
     title: "Corporate Identity",
     image: "/images/roll-up-banner.jpg",
     desc: "Consistent, iconic branding collateral across every touchpoint of your business.",
-    items: [
-      "Logo & Brand Collateral",
-      "Business Cards & Stationery",
-      "Signage",
-      "Vehicle Branding",
-    ],
+    seeMore: "Browse the catalogue",
+    seeMoreHref: "/catalogue",
   },
-];
-
-const OFFICE_ITEMS = [
-  { name: "Office Stationery", file: "office-stationery.png" },
-  { name: "Pens", file: "office-pens.png" },
-  { name: "Phone/Desk Stand", file: "office-phone-stand.png" },
-  { name: "Printers", file: "office-printer.png" },
-  { name: "Photocopy Paper", file: "office-paper.png" },
-  { name: "Sticky Notes", file: "office-sticky-notes.png" },
-  { name: "Computer Desktops", file: "office-desktop.png" },
-];
-
-const UNIFORM_ITEMS = [
-  { name: "Company Staff Uniform", file: "uniform-company-staff.png" },
-  { name: "Chef Attire", file: "uniform-chef-attire.png" },
-  { name: "Chef Kit", file: "uniform-chef-kit.png" },
-  { name: "School Uniform", file: "uniform-school.png" },
-  { name: "Sports Uniform", file: "uniform-sports.png" },
-  { name: "Sport Shoes", file: "uniform-sport-shoes.png" },
-  { name: "Safety Apparel", file: "uniform-safety.png" },
-  { name: "Corporate Uniform", file: "uniform-corporate.png" },
-  { name: "Nurse Staff Uniform", file: "uniform-nurse.png" },
 ];
 
 export default function ServicesPage() {
@@ -112,10 +65,21 @@ export default function ServicesPage() {
           <h1 className="font-display mt-4 text-5xl leading-tight text-ink sm:text-6xl">
             Our Services
           </h1>
-          <p className="mt-4 max-w-md text-ink-soft">
-            Office Equipment · Staff Uniform · General Supplies · Printing ·
-            Corporate Identity
-          </p>
+          <ul className="mt-8 max-w-sm border-t border-line">
+            {SECTIONS.map((s) => (
+              <li
+                key={s.title}
+                className="flex items-baseline gap-4 border-b border-line py-3"
+              >
+                <span className="font-display text-xs text-accent">
+                  {s.index}
+                </span>
+                <span className="font-display text-lg text-ink">
+                  {s.title}
+                </span>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
@@ -140,43 +104,16 @@ export default function ServicesPage() {
                     {s.title}
                   </h2>
                   <p className="mt-2 text-sm text-ink-soft">{s.desc}</p>
-                  <ul className="mt-4 grid grid-cols-2 gap-1.5 text-sm text-ink-soft">
-                    {s.items.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
+                  <Link
+                    href={s.seeMoreHref}
+                    className="eyebrow link-reveal mt-4 inline-block text-accent"
+                  >
+                    {s.seeMore}
+                  </Link>
                 </div>
               </div>
             </Reveal>
           ))}
-        </div>
-      </section>
-
-      <section className="border-t border-line px-6 py-20 sm:px-10 sm:py-28">
-        <div className="mx-auto max-w-7xl">
-          <Reveal>
-            <p className="eyebrow text-accent">Office Equipment</p>
-            <h2 className="font-display mt-3 text-4xl text-ink sm:text-5xl">
-              Everything for the Workplace
-            </h2>
-          </Reveal>
-          <div className="mt-12">
-            <PhotoMasonry items={OFFICE_ITEMS} basePath="/images/office" />
-          </div>
-        </div>
-      </section>
-
-      <section className="border-t border-line px-6 py-20 sm:px-10 sm:py-28">
-        <div className="mx-auto max-w-7xl">
-          <Reveal>
-            <p className="eyebrow text-accent">Staff Uniform</p>
-            <h2 className="font-display mt-3 text-4xl text-ink sm:text-5xl">
-              Uniforms for Every Team
-            </h2>
-          </Reveal>
-          <div className="mt-12">
-            <PhotoMasonry items={UNIFORM_ITEMS} basePath="/images/uniforms" />
-          </div>
         </div>
       </section>
     </div>
