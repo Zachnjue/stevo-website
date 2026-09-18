@@ -38,6 +38,7 @@ export default async function CataloguePanel() {
               key={item.id}
               item={item}
               categoryTitle={categoryById.get(item.category_id)?.title ?? "—"}
+              categories={categories ?? []}
             />
           ))}
           {(items ?? []).length === 0 && (

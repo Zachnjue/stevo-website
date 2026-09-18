@@ -77,6 +77,60 @@ export async function addCatalogueItem(_prevState: unknown, formData: FormData) 
   return { error: null };
 }
 
+export async function updateCatalogueItem(
+  _prevState: unknown,
+  formData: FormData,
+) {
+  const supabase = await createClient();
+
+  const id = String(formData.get("id") ?? "");
+  const name = String(formData.get("name") ?? "").trim();
+  const categoryId = String(formData.get("category_id") ?? "");
+  const fit = String(formData.get("fit") ?? "contain");
+  const existingImagePath = String(formData.get("existing_image_path") ?? "");
+  const photo = formData.get("photo") as File | null;
+
+  if (!id || !name || !categoryId) {
+    return { error: "Name and category are required." };
+  }
+
+  let imagePath: string | null = existingImagePath || null;
+
+  if (photo && photo.size > 0) {
+    const ext = photo.name.split(".").pop() || "jpg";
+    const path = `${categoryId}/${crypto.randomUUID()}.${ext}`;
+
+    const { error: uploadError } = await supabase.storage
+      .from("catalogue")
+      .upload(path, photo);
+
+    if (uploadError) {
+      return { error: `Photo upload failed: ${uploadError.message}` };
+    }
+
+    // Only remove the old photo if it was a real upload, not the seeded
+    // "local:" placeholder that points at a file in public/images.
+    if (existingImagePath && !existingImagePath.startsWith("local:")) {
+      await supabase.storage.from("catalogue").remove([existingImagePath]);
+    }
+
+    imagePath = path;
+  }
+
+  const { error } = await supabase
+    .from("catalogue_items")
+    .update({ name, category_id: categoryId, fit, image_path: imagePath })
+    .eq("id", id);
+
+  if (error) {
+    return { error: error.message };
+  }
+
+  revalidatePath("/admin");
+  revalidatePath("/catalogue");
+  return { error: null };
+}
+
 export async function deleteCatalogueItem(id: string, imagePath: string | null) {
   const supabase = await createClient();
 
