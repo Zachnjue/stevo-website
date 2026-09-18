@@ -4,7 +4,12 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 
-export async function signIn(_prevState: unknown, formData: FormData) {
+export type SignInState = { error: string | null };
+
+export async function signIn(
+  _prevState: SignInState,
+  formData: FormData,
+): Promise<SignInState> {
   const email = String(formData.get("email") ?? "");
   const password = String(formData.get("password") ?? "");
 

@@ -3,10 +3,12 @@
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 
+export type PaymentSettingsState = { error: string | null; saved: boolean };
+
 export async function updatePaymentSettings(
-  _prevState: unknown,
+  _prevState: PaymentSettingsState,
   formData: FormData,
-) {
+): Promise<PaymentSettingsState> {
   const supabase = await createClient();
 
   const fields = [
@@ -33,7 +35,7 @@ export async function updatePaymentSettings(
     .eq("id", 1);
 
   if (error) {
-    return { error: error.message };
+    return { error: error.message, saved: false };
   }
 
   revalidatePath("/admin");

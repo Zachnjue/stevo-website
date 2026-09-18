@@ -22,6 +22,7 @@ export default function PaymentSettingsForm({
 }) {
   const [state, formAction, pending] = useActionState(updatePaymentSettings, {
     error: null,
+    saved: false,
   });
 
   const field = (name: keyof NonNullable<Settings>, label: string) => (
@@ -63,7 +64,7 @@ export default function PaymentSettingsForm({
         {state?.error && (
           <p className="mb-4 text-sm text-red-600">{state.error}</p>
         )}
-        {state && "saved" in state && state.saved && (
+        {state?.saved && (
           <p className="mb-4 text-sm text-brand-blue">Saved.</p>
         )}
         <button
