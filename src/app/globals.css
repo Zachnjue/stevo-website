@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+@media print {
+  body > header,
+  body > footer,
+  .no-print {
+    display: none !important;
+  }
+}
+
 :root {
   /* Neutral editorial foundation */
   --paper: #f7f5f1;

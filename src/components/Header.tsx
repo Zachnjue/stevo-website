@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -30,13 +31,20 @@ export default function Header() {
         scrolled ? "border-line" : "border-transparent"
       }`}
     >
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 sm:px-10">
+      <div className="flex w-full items-center justify-between py-2 pl-3 pr-6 sm:pl-4 sm:pr-10">
         <Link
           href="/"
-          className="font-display text-lg leading-none tracking-tight text-ink"
+          className="flex items-center"
           onClick={() => setOpen(false)}
         >
-          Thee Printing Hub
+          <Image
+            src="/images/logo.png"
+            alt="Thee Printing Hub"
+            width={470}
+            height={300}
+            priority
+            className="h-16 w-auto sm:h-20"
+          />
         </Link>
 
         <nav className="hidden items-center gap-10 text-xs md:flex">

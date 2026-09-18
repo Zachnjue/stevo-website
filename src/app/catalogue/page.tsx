@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import PhotoMasonry from "@/components/PhotoMasonry";
 import RegMark from "@/components/RegMark";
+import { createClient } from "@/lib/supabase/server";
 
 export const metadata: Metadata = {
   title: "Catalogue | Thee Printing Hub",
@@ -8,25 +9,28 @@ export const metadata: Metadata = {
     "Browse Thee Printing Hub's catalogue of branded merchandise, uniforms, and printed materials — real work produced for our clients.",
 };
 
-const CATALOGUE_ITEMS = [
-  { name: "Branded Passport Holders", file: "cat-passport-holder.png" },
-  { name: "Custom Pens", file: "cat-pens.png" },
-  { name: "Custom Printed T-Shirts", file: "cat-tshirts.png" },
-  { name: "Gift Bags & Tags", file: "cat-gift-tags.png" },
-  { name: "Brochures & Flyers", file: "cat-brochure-fan.png" },
-  { name: "Branded Notebooks", file: "cat-notebooks.png" },
-  { name: "Keychains & Gift Sets", file: "cat-keychain-box.png" },
-  { name: "Safety Vests", file: "cat-safety-vest.png" },
-  { name: "Stickers & Decals", file: "cat-sticker-badge.png" },
-  { name: "Spiral Notebooks", file: "cat-spiral-notebook.png" },
-  { name: "Branded Mugs", file: "cat-mug-orange.png" },
-  { name: "Water Bottles", file: "cat-bottle-black-wood.png" },
-  { name: "Branded Caps", file: "cat-caps.png" },
-  { name: "Water Bottles", file: "cat-bottle-blue.png" },
-  { name: "Roll-up Banners", file: "cat-rollup-banners.png" },
-];
+const LOCAL_PREFIX = "local:";
 
-export default function CataloguePage() {
+export default async function CataloguePage() {
+  const supabase = await createClient();
+
+  const [{ data: categories }, { data: items }] = await Promise.all([
+    supabase.from("categories").select("*").order("sort_order"),
+    supabase
+      .from("catalogue_items")
+      .select("*")
+      .order("sort_order", { ascending: true }),
+  ]);
+
+  const itemsByCategory = new Map<string, typeof items>();
+  for (const item of items ?? []) {
+    const list = itemsByCategory.get(item.category_id) ?? [];
+    list.push(item);
+    itemsByCategory.set(item.category_id, list);
+  }
+
+  let runningIndex = 0;
+
   return (
     <div>
       <section className="border-b border-line px-6 py-16 sm:px-10 sm:py-24">
@@ -44,13 +48,50 @@ export default function CataloguePage() {
         </p>
       </section>
 
-      <section className="px-6 py-16 sm:px-10 sm:py-24">
-        <PhotoMasonry
-          items={CATALOGUE_ITEMS}
-          basePath="/images/catalogue"
-          fit="cover"
-        />
-      </section>
+      {(categories ?? []).map((category) => {
+        const categoryItems = itemsByCategory.get(category.id) ?? [];
+        if (categoryItems.length === 0) return null;
+
+        const masonryItems = categoryItems.map((item) => {
+          if (item.image_path?.startsWith(LOCAL_PREFIX)) {
+            return {
+              name: item.name,
+              file: item.image_path.slice(LOCAL_PREFIX.length),
+              fit: item.fit as "contain" | "cover",
+            };
+          }
+          if (item.image_path) {
+            const {
+              data: { publicUrl },
+            } = supabase.storage.from("catalogue").getPublicUrl(item.image_path);
+            return {
+              name: item.name,
+              url: publicUrl,
+              fit: item.fit as "contain" | "cover",
+            };
+          }
+          return { name: item.name, fit: item.fit as "contain" | "cover" };
+        });
+
+        const startIndex = runningIndex;
+        runningIndex += masonryItems.length;
+
+        return (
+          <section
+            key={category.id}
+            className="border-b border-line px-6 py-16 last:border-b-0 sm:px-10 sm:py-24"
+          >
+            <h2 className="font-display mb-10 text-3xl text-ink sm:text-4xl">
+              {category.title}
+            </h2>
+            <PhotoMasonry
+              items={masonryItems}
+              basePath="/images/catalogue"
+              startIndex={startIndex}
+            />
+          </section>
+        );
+      })}
     </div>
   );
 }
