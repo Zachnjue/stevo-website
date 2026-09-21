@@ -6,7 +6,6 @@ const CLIENTS = [
   { name: "Rainforest Alliance", file: "rainforest-alliance.png", w: 528, h: 158 },
   { name: "Premier Airlines", file: "premier-airlines.png", w: 694, h: 119 },
   { name: "Serene Health Connect", file: "serene-health-connect.png", w: 527, h: 213 },
-  { name: "Galooli", file: "galooli.png", w: 543, h: 174 },
   { name: "Kencream Sacco", file: "kencream.png", w: 509, h: 342 },
   { name: "NRG Radio", file: "nrg-radio.png", w: 239, h: 412 },
   { name: "Halcyon Health Care Centre", file: "halcyon.png", w: 691, h: 178 },
