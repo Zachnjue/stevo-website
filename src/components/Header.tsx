@@ -31,6 +31,7 @@ export default function Header() {
         scrolled ? "border-line" : "border-transparent"
       }`}
     >
+      <div className="cmyk-bar h-1.5" aria-hidden="true" />
       <div className="flex w-full items-center justify-between py-2 pl-3 pr-6 sm:pl-4 sm:pr-10">
         <Link
           href="/"

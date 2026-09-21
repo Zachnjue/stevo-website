@@ -31,7 +31,7 @@ export default function VisionMissionValues() {
   return (
     <div className="grid gap-10 pt-10 sm:grid-cols-3">
       {CARDS.map((c) => (
-        <div key={c.key} className="relative pt-8">
+        <div key={c.key} className="relative flex flex-col pt-8">
           <div className="absolute -top-2 left-1/2 z-10 -translate-x-1/2">
             <Image
               src={c.icon}
@@ -42,7 +42,7 @@ export default function VisionMissionValues() {
             />
           </div>
 
-          <div className="relative rounded-3xl bg-white px-6 pb-8 pt-12 text-center text-ink shadow-lg">
+          <div className="relative flex-1 rounded-3xl bg-white px-6 pb-8 pt-12 text-center text-ink shadow-lg">
             <p className="text-sm leading-relaxed text-ink-soft">{c.body}</p>
             <div className="absolute -bottom-3 left-1/2 h-6 w-6 -translate-x-1/2 rotate-45 bg-white" />
           </div>

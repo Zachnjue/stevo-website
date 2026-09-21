@@ -13,7 +13,7 @@ const sans = Inter({
 const display = Fraunces({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: ["500", "600"],
+  weight: ["300", "500", "600"],
   style: ["normal", "italic"],
 });
 

@@ -1,5 +1,7 @@
 import Image from "next/image";
 
+// Logos are shown in their original brand colours, so this strip belongs on a
+// light background (see the wrapper section in app/page.tsx).
 const CLIENTS = [
   { name: "Rainforest Alliance", file: "rainforest-alliance.png", w: 528, h: 158 },
   { name: "Premier Airlines", file: "premier-airlines.png", w: 694, h: 119 },
@@ -19,15 +21,37 @@ const CLIENTS = [
   { name: "Exquisite Expo Concepts", file: "exquisite-expo.png", w: 391, h: 207 },
 ];
 
+// Size each logo to roughly the same visual weight (area), so wide wordmarks
+// aren't dwarfed by, or dwarfing, tall marks. Capped so nothing gets huge.
+const TARGET_AREA = 12500;
+const MAX_W = 180;
+const MAX_H = 76;
+
+function displaySize(w: number, h: number) {
+  const ratio = w / h;
+  let dw = Math.sqrt(TARGET_AREA * ratio);
+  let dh = dw / ratio;
+  if (dw > MAX_W) {
+    dw = MAX_W;
+    dh = dw / ratio;
+  }
+  if (dh > MAX_H) {
+    dh = MAX_H;
+    dw = dh * ratio;
+  }
+  return { width: Math.round(dw), height: Math.round(dh) };
+}
+
 function LogoBadge({ name, file, w, h }: { name: string; file: string; w: number; h: number }) {
   return (
-    <div className="flex h-20 w-44 shrink-0 items-center justify-center border-r border-line px-6 last:border-r-0">
+    <div className="flex h-28 w-56 shrink-0 items-center justify-center px-6">
       <Image
         src={`/images/clients/${file}`}
         alt={name}
         width={w}
         height={h}
-        className="max-h-12 w-auto object-contain opacity-90 transition-all duration-300 hover:opacity-100 hover:scale-105"
+        style={displaySize(w, h)}
+        className="object-contain transition-transform duration-300 hover:scale-105"
       />
     </div>
   );
@@ -37,7 +61,7 @@ export default function ClientMarquee() {
   const track = [...CLIENTS, ...CLIENTS];
 
   return (
-    <div className="relative overflow-hidden border-y border-line [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]">
+    <div className="relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
       <div className="flex w-max animate-marquee">
         {track.map((c, i) => (
           <LogoBadge key={`${c.name}-${i}`} {...c} />

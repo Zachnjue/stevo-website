@@ -3,6 +3,7 @@ import Link from "next/link";
 export default function Footer() {
   return (
     <footer className="bg-ink text-paper">
+      <div className="cmyk-bar h-1.5" aria-hidden="true" />
       <div className="mx-auto grid max-w-7xl gap-12 px-6 py-16 sm:grid-cols-3 sm:px-10">
         <div>
           <p className="font-display text-2xl">Thee Printing Hub</p>

@@ -17,9 +17,10 @@ type TabKey = (typeof TABS)[number]["key"];
 export default async function AdminPage({
   searchParams,
 }: {
-  searchParams: Promise<{ tab?: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-  const { tab } = await searchParams;
+  const params = await searchParams;
+  const tab = params.tab;
   const activeTab: TabKey = TABS.some((t) => t.key === tab)
     ? (tab as TabKey)
     : "catalogue";
@@ -87,7 +88,7 @@ export default async function AdminPage({
 
         <div className="mt-8">
           {activeTab === "catalogue" && <CataloguePanel />}
-          {activeTab === "finance" && <FinancePanel />}
+          {activeTab === "finance" && <FinancePanel searchParams={params} />}
           {activeTab === "invoices" && <InvoicesPanel />}
           {activeTab === "settings" && <SettingsPanel />}
         </div>

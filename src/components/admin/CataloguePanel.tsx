@@ -11,10 +11,19 @@ export default async function CataloguePanel() {
     supabase
       .from("catalogue_items")
       .select("*")
+      .order("sort_order", { ascending: true })
       .order("created_at", { ascending: false }),
   ]);
 
   const categoryById = new Map((categories ?? []).map((c) => [c.id, c]));
+
+  // Same order as the public catalogue: by category, then by item order.
+  const categoryRank = new Map((categories ?? []).map((c, i) => [c.id, i]));
+  const sortedItems = [...(items ?? [])].sort(
+    (a, b) =>
+      (categoryRank.get(a.category_id) ?? 0) -
+      (categoryRank.get(b.category_id) ?? 0)
+  );
 
   return (
     <div>
@@ -30,10 +39,10 @@ export default async function CataloguePanel() {
 
       <section className="mt-12">
         <h2 className="font-display text-xl text-ink">
-          Existing items ({items?.length ?? 0})
+          Existing items ({sortedItems.length})
         </h2>
         <div className="mt-6 flex flex-col divide-y divide-line border-t border-line">
-          {(items ?? []).map((item) => (
+          {sortedItems.map((item) => (
             <CatalogueItemRow
               key={item.id}
               item={item}
@@ -41,7 +50,7 @@ export default async function CataloguePanel() {
               categories={categories ?? []}
             />
           ))}
-          {(items ?? []).length === 0 && (
+          {sortedItems.length === 0 && (
             <p className="py-6 text-sm text-ink-soft">No items yet.</p>
           )}
         </div>

@@ -4,11 +4,66 @@ import ClientMarquee from "@/components/ClientMarquee";
 import Reveal from "@/components/Reveal";
 import RegMark from "@/components/RegMark";
 
+// Hero mosaic. On desktop this is a 12-column, 2-row grid: the neon sign and
+// the roll-up span both rows, the other four sit in pairs between them.
+const HERO_WORK = [
+  {
+    image: "/images/catalogue/signage6.jpg",
+    alt: "Red neon Uptown Lounge sign",
+    label: "Neon signage",
+    sizes: "(min-width: 1024px) 33vw, 100vw",
+    cls: "col-span-2 aspect-[16/11] lg:col-span-4 lg:row-span-2 lg:aspect-auto",
+    pos: "center",
+  },
+  {
+    image: "/images/catalogue/hoodie.jpg",
+    alt: "Embroidered hoodies in yellow, grey and orange",
+    label: "Embroidered hoodies",
+    sizes: "(min-width: 1024px) 25vw, 50vw",
+    cls: "aspect-[4/5] lg:col-span-3 lg:aspect-auto",
+    pos: "50% 35%",
+  },
+  {
+    image: "/images/catalogue/roll-up.jpg",
+    alt: "Zero Malaria roll-up banner",
+    label: "Roll-up banners",
+    sizes: "(min-width: 1024px) 17vw, 50vw",
+    cls: "aspect-[4/5] lg:col-span-2 lg:row-span-2 lg:aspect-auto",
+    pos: "center",
+  },
+  {
+    image: "/images/catalogue/umbrella2.jpg",
+    alt: "White branded golf umbrella",
+    label: "Branded umbrellas",
+    sizes: "(min-width: 1024px) 25vw, 50vw",
+    cls: "aspect-[4/5] lg:col-span-3 lg:aspect-auto",
+    pos: "center",
+  },
+  {
+    image: "/images/catalogue/jersey-bvb.jpg",
+    alt: "Yellow football jersey on grass",
+    label: "Custom jerseys",
+    sizes: "(min-width: 1024px) 25vw, 50vw",
+    cls: "aspect-[4/5] lg:col-span-3 lg:aspect-auto",
+    pos: "center",
+  },
+  {
+    image: "/images/catalogue/trophy-awards-2.jpg",
+    alt: "Engraved glass service award",
+    label: "Engraved awards",
+    sizes: "(min-width: 1024px) 25vw, 100vw",
+    cls: "col-span-2 aspect-[16/10] lg:col-span-3 lg:aspect-auto",
+    pos: "50% 35%",
+  },
+];
+
 const FEATURED_SERVICE = {
   index: "01",
   title: "Corporate Identity",
   desc: "Logos, brand collateral, signage, and printed materials that give your brand a consistent, iconic look across every touchpoint.",
-  image: "/images/roll-up-banner.jpg",
+  image: "/images/catalogue/signage4.jpg",
+  // Tall photo in a wide tile: aim the crop at the Vivo sign and shopfront.
+  position: "50% 37%",
 };
 
 const SERVICES = [
@@ -16,19 +71,19 @@ const SERVICES = [
     index: "02",
     title: "Staff Uniform",
     desc: "Company, chef, school, sports, safety, and corporate uniforms customized to your specifications.",
-    image: "/images/chef-uniform.jpg",
+    image: "/images/catalogue/polo-tshirt2.jpg",
   },
   {
     index: "03",
     title: "Printing",
     desc: "Gift bags, banners, notebooks, and promotional material branding that demands attention.",
-    image: "/images/gift-bags.jpg",
+    image: "/images/catalogue/posters-fliers.jpg",
   },
   {
     index: "04",
     title: "Office Equipment",
     desc: "Stationery, printers, photocopy paper, desktops, and general supplies for your workplace.",
-    image: "/images/office-supplies.jpg",
+    image: "/images/catalogue/notebooks.jpg",
   },
 ];
 
@@ -36,59 +91,79 @@ export default function Home() {
   return (
     <div className="flex flex-col">
       {/* Hero */}
-      <section className="grid md:grid-cols-[1.1fr_1fr]">
-        <div className="flex flex-col justify-center px-6 py-16 sm:px-10 sm:py-24 lg:py-32">
-          <p className="eyebrow flex items-center gap-2 text-ink-soft">
-            <RegMark className="h-4 w-4 text-brand-blue" />
-            Ink is our underlying foundation
-          </p>
-          <h1 className="font-display mt-6 text-5xl leading-[1.05] text-ink sm:text-6xl lg:text-7xl">
-            Branding &amp;
-            <br />
-            Printing that
-            <br />
-            make brands{" "}
-            <span className="text-brand-blue">iconic.</span>
-          </h1>
-          <p className="mt-8 max-w-md text-ink-soft">
-            A vibrant, below-the-line branding and printing company —
-            we formulate traction and create materials that stand out and
-            demand attention.
-          </p>
-          <div className="mt-10 flex flex-wrap items-center gap-8">
-            <Link
-              href="/contact"
-              className="eyebrow border border-ink px-7 py-3.5 text-ink transition-colors hover:border-brand-blue hover:bg-brand-blue hover:text-white"
-            >
-              Get a Quote
-            </Link>
-            <Link href="/catalogue" className="eyebrow link-reveal text-ink">
-              View Catalogue →
-            </Link>
-          </div>
+      <section className="bg-brand-navy px-6 pb-16 pt-14 text-paper [--crop-color:var(--paper)] sm:px-10 sm:pb-24 sm:pt-20">
+        <p className="eyebrow flex items-center gap-2 text-paper/80">
+          <RegMark className="h-4 w-4" />
+          Branding &amp; Printing · Nairobi
+        </p>
+        <h1 className="display-light mt-6 max-w-5xl text-6xl leading-[0.98] sm:text-7xl lg:text-8xl xl:text-9xl">
+          Brands worth
+          <br />
+          remembering.
+        </h1>
+        <div className="mt-10 flex flex-wrap items-center gap-8">
+          <Link
+            href="/contact"
+            className="eyebrow border border-paper bg-paper px-7 py-3.5 text-ink transition-colors hover:bg-transparent hover:text-paper"
+          >
+            Get a Quote
+          </Link>
+          <Link href="/catalogue" className="eyebrow link-reveal">
+            View Catalogue →
+          </Link>
         </div>
 
-        <div className="crop-corners relative min-h-[320px] md:min-h-0">
-          <Image
-            src="/images/printing-press.jpg"
-            alt="Printing press running a large print job"
-            fill
-            priority
-            className="object-cover"
-          />
+        {/* Selected client work, laid out as an editorial mosaic */}
+        <div className="mt-12 grid grid-cols-2 gap-3 sm:mt-16 sm:gap-4 lg:grid-cols-12 lg:grid-rows-2 lg:aspect-[12/5]">
+          {HERO_WORK.map((w, i) => (
+            <Reveal
+              key={w.image}
+              delay={i * 80}
+              className={`crop-corners relative ${w.cls}`}
+            >
+              <Link
+                href="/catalogue"
+                className="group relative block h-full w-full overflow-hidden bg-paper-deep"
+              >
+                <Image
+                  src={w.image}
+                  alt={w.alt}
+                  fill
+                  priority={i < 3}
+                  sizes={w.sizes}
+                  style={{ objectPosition: w.pos }}
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/70 to-transparent px-4 pb-3 pt-12">
+                  <p className="eyebrow text-paper">
+                    <span className="text-paper/60">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>{" "}
+                    — {w.label}
+                  </p>
+                </div>
+              </Link>
+            </Reveal>
+          ))}
+        </div>
+        <div className="mt-5 flex items-center justify-between">
+          <p className="eyebrow text-paper/80">Selected work</p>
+          <Link href="/catalogue" className="eyebrow link-reveal">
+            View all work →
+          </Link>
         </div>
       </section>
 
       {/* What we do */}
-      <section className="border-t border-line px-6 py-20 sm:px-10 sm:py-28">
+      <section className="px-6 py-20 sm:px-10 sm:py-28">
         <div className="mx-auto max-w-7xl">
           <Reveal className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
             <div>
               <p className="eyebrow text-accent">What We Do</p>
-              <h2 className="font-display mt-3 text-4xl text-ink sm:text-5xl">
-                Every Touchpoint
+              <h2 className="display-light mt-3 text-5xl leading-[1.02] text-ink sm:text-7xl">
+                Every touchpoint
                 <br />
-                of Your Brand
+                of your brand.
               </h2>
             </div>
             <Link href="/services" className="eyebrow link-reveal shrink-0 text-ink">
@@ -102,8 +177,10 @@ export default function Home() {
                 <div className="relative aspect-[4/3] overflow-hidden">
                   <Image
                     src={FEATURED_SERVICE.image}
-                    alt={FEATURED_SERVICE.title}
+                    alt="Illuminated Vivo shop sign being installed"
                     fill
+                    sizes="(min-width: 1024px) 40vw, 100vw"
+                    style={{ objectPosition: FEATURED_SERVICE.position }}
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                 </div>
@@ -153,45 +230,11 @@ export default function Home() {
       </section>
 
       {/* Clients */}
-      <section className="border-t border-line py-20 sm:py-28">
-        <div className="mx-auto max-w-7xl px-6 sm:px-10">
-          <Reveal>
-            <p className="eyebrow text-center text-ink-soft">
-              Trusted by Leading Brands
-            </p>
-          </Reveal>
-        </div>
-        <div className="mt-10">
-          <ClientMarquee />
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="relative overflow-hidden">
-        <div className="relative aspect-[16/9] sm:aspect-[21/9]">
-          <Image
-            src="/images/branded-apparel.jpg"
-            alt="Stack of folded branded apparel"
-            fill
-            className="object-cover"
-          />
-          <div className="absolute inset-0 bg-ink/60" />
-          <Reveal className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center text-paper">
-            <h2 className="font-display max-w-2xl text-4xl leading-tight sm:text-5xl">
-              Ready to give your brand an iconic look?
-            </h2>
-            <p className="mt-4 max-w-md text-paper/80">
-              Talk to us about your next print run, uniform order, or
-              branding campaign.
-            </p>
-            <Link
-              href="/contact"
-              className="eyebrow mt-8 border border-brand-yellow px-8 py-3.5 text-paper transition-colors hover:bg-brand-yellow hover:text-ink"
-            >
-              Contact Us
-            </Link>
-          </Reveal>
-        </div>
+      <section className="border-t border-line bg-white py-12 sm:py-16">
+        <p className="eyebrow mb-8 text-center text-ink-soft">
+          Trusted by leading brands
+        </p>
+        <ClientMarquee />
       </section>
     </div>
   );

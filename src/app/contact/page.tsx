@@ -12,15 +12,15 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <div>
-      <section className="border-b border-line px-6 py-16 sm:px-10 sm:py-24">
-        <p className="eyebrow flex items-center gap-2 text-ink-soft">
-          <RegMark className="h-4 w-4 text-brand-blue" />
+      <section className="bg-brand-blue-deep px-6 py-16 text-white sm:px-10 sm:py-24">
+        <p className="eyebrow flex items-center gap-2 text-white/90">
+          <RegMark className="h-4 w-4" />
           Contact Us
         </p>
-        <h1 className="font-display mt-4 text-5xl leading-tight text-ink sm:text-6xl">
-          Let&apos;s Talk
+        <h1 className="display-light mt-6 text-6xl leading-[0.98] sm:text-7xl lg:text-8xl">
+          Let&apos;s talk.
         </h1>
-        <p className="mt-4 max-w-md text-ink-soft">
+        <p className="mt-4 max-w-md text-white/85">
           Reach out for quotes, custom orders, or general enquiries.
         </p>
       </section>

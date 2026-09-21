@@ -16,16 +16,21 @@
   --ink-soft: #4a4744;
   --line: rgba(20, 20, 20, 0.12);
 
-  /* Thee Printing Hub's own brand colors, used as the editorial accents */
-  --brand-blue: #1f8fcf;
-  --brand-blue-dark: #146a9c;
-  --brand-pink: #e51879;
-  --brand-yellow: #f5b800;
+  /* The logo's four inks (CMYK): cyan-blue, magenta, yellow and black.
+     Sampled from public/images/logo.png. */
+  --brand-blue: #2a8bcf;
+  --brand-blue-deep: #1c74b3; /* fills that carry white text (~5:1) */
+  --brand-navy: #123e5c; /* calm dark blue for large hero blocks */
+  --brand-blue-dark: #146a9c; /* blue text on cream */
+  --brand-pink: #dc1178;
+  --brand-yellow: #f2c318;
   --brand-black: #141414;
 
-  --accent: var(--brand-pink);
+  /* One accent, held site-wide. The darker blue keeps small text legible
+     on the cream background (~5.6:1 contrast). */
+  --accent: var(--brand-blue-dark);
   --accent-2: var(--brand-blue);
-  --accent-3: var(--brand-yellow);
+  --accent-3: var(--brand-blue);
 
   --background: var(--paper);
   --foreground: var(--ink);
@@ -43,6 +48,8 @@
   --color-accent-2: var(--accent-2);
   --color-accent-3: var(--accent-3);
   --color-brand-blue: var(--brand-blue);
+  --color-brand-blue-deep: var(--brand-blue-deep);
+  --color-brand-navy: var(--brand-navy);
   --color-brand-blue-dark: var(--brand-blue-dark);
   --color-brand-pink: var(--brand-pink);
   --color-brand-yellow: var(--brand-yellow);
@@ -60,6 +67,25 @@ body {
 .font-display {
   font-family: var(--font-display), Georgia, "Times New Roman", serif;
   font-weight: 600;
+}
+
+/* Print-proof colour bar: the four inks in the logo, the way a press marks
+   its colour registration. Used as a thin signature rule. */
+.cmyk-bar {
+  background: linear-gradient(
+    to right,
+    var(--brand-blue) 0 25%,
+    var(--brand-pink) 25% 50%,
+    var(--brand-yellow) 50% 75%,
+    var(--brand-black) 75% 100%
+  );
+}
+
+/* Light, tightly-set display cut for oversized headlines */
+.display-light {
+  font-family: var(--font-display), Georgia, "Times New Roman", serif;
+  font-weight: 300;
+  letter-spacing: -0.025em;
 }
 
 /* Small tracked editorial label, e.g. "02 — SERVICES" */
@@ -129,15 +155,15 @@ body {
 .crop-corners::before {
   top: -7px;
   left: -7px;
-  border-top: 1px solid var(--ink);
-  border-left: 1px solid var(--ink);
+  border-top: 1px solid var(--crop-color, var(--ink));
+  border-left: 1px solid var(--crop-color, var(--ink));
 }
 
 .crop-corners::after {
   bottom: -7px;
   right: -7px;
-  border-bottom: 1px solid var(--ink);
-  border-right: 1px solid var(--ink);
+  border-bottom: 1px solid var(--crop-color, var(--ink));
+  border-right: 1px solid var(--crop-color, var(--ink));
 }
 
 .crop-corners:hover::before,
