@@ -55,6 +55,19 @@ export default function ContactPage() {
                   </a>
                 </dd>
               </div>
+              <div className="border-t border-line pt-4">
+                <dt className="eyebrow text-ink">Instagram</dt>
+                <dd className="mt-1">
+                  <a
+                    href="https://www.instagram.com/theeprintinghub"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="link-reveal"
+                  >
+                    @theeprintinghub
+                  </a>
+                </dd>
+              </div>
             </dl>
           </Reveal>
 

@@ -36,6 +36,16 @@ export default function Footer() {
                 theeprinting.hub@gmail.com
               </a>
             </li>
+            <li>
+              <a
+                href="https://www.instagram.com/theeprintinghub"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="link-reveal"
+              >
+                Instagram: @theeprintinghub
+              </a>
+            </li>
           </ul>
         </div>
       </div>
