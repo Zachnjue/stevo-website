@@ -25,7 +25,16 @@ export default function Footer() {
         <div className="text-sm text-paper/70">
           <p className="eyebrow mb-4 text-paper">Contact</p>
           <ul className="space-y-2">
-            <li>Latema Plaza, 3rd Floor, Room 302</li>
+            <li>
+              <a
+                href="https://maps.google.com/?q=Latema+Plaza,+Nairobi"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="link-reveal"
+              >
+                Latema Plaza, 3rd Floor, Room 302
+              </a>
+            </li>
             <li>
               <a href="tel:0748679132" className="link-reveal">
                 0748 679 132

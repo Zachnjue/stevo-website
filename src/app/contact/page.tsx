@@ -33,7 +33,14 @@ export default function ContactPage() {
               <div className="border-t border-line pt-4">
                 <dt className="eyebrow text-ink">Location</dt>
                 <dd className="mt-1">
-                  Latema Plaza Building, 3rd Floor, Room No. 302
+                  <a
+                    href="https://maps.google.com/?q=Latema+Plaza,+Nairobi"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="link-reveal"
+                  >
+                    Latema Plaza Building, 3rd Floor, Room No. 302
+                  </a>
                 </dd>
               </div>
               <div className="border-t border-line pt-4">
@@ -69,6 +76,18 @@ export default function ContactPage() {
                 </dd>
               </div>
             </dl>
+
+            <div className="mt-8 overflow-hidden rounded-lg border border-line">
+              <iframe
+                title="Thee Printing Hub location — Latema Plaza, 3rd Floor, Room 302"
+                src="https://maps.google.com/maps?q=Latema%20Plaza%2C%20Nairobi&z=16&output=embed"
+                width="100%"
+                height="320"
+                style={{ border: 0 }}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </div>
           </Reveal>
 
           <Reveal delay={150}>
