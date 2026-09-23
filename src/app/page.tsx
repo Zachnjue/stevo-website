@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import ClientMarquee from "@/components/ClientMarquee";
-import Testimonials from "@/components/Testimonials";
 import Reveal from "@/components/Reveal";
 import RegMark from "@/components/RegMark";
 
@@ -261,23 +260,6 @@ export default function Home() {
         </div>
       </section>
 
-      <Testimonials limit={1} moreHref="/about#testimonials" />
-
-      {/* Closing CTA */}
-      <section className="border-t border-line px-6 py-20 text-center sm:px-10 sm:py-28">
-        <Reveal>
-          <p className="eyebrow text-accent">Have a project in mind?</p>
-          <h2 className="display-light mx-auto mt-4 max-w-2xl text-4xl leading-[1.05] text-ink sm:text-6xl">
-            Let&apos;s put your brand in print.
-          </h2>
-          <Link
-            href="/contact"
-            className="eyebrow mt-10 inline-block border border-ink bg-ink px-7 py-3.5 text-paper transition-colors hover:bg-transparent hover:text-ink"
-          >
-            Request a Quote
-          </Link>
-        </Reveal>
-      </section>
     </div>
   );
 }
