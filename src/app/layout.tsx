@@ -21,7 +21,7 @@ const display = Fraunces({
 export const metadata: Metadata = {
   title: "Thee Printing Hub | Branding & Printing",
   description:
-    "Thee Printing Hub is a below-the-line branding and printing company in Nairobi offering corporate identity, staff uniforms, promotional merchandise, office supplies, and printing services.",
+    "Branding and printing company in Nairobi — corporate identity, staff uniforms, promotional merchandise, office supplies, and printing services.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -31,6 +31,26 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${sans.variable} ${display.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "LocalBusiness",
+              name: "Thee Printing Hub",
+              url: "https://www.theeprintinghub.com",
+              email: "theeprinting.hub@gmail.com",
+              telephone: "+254748679132",
+              address: {
+                "@type": "PostalAddress",
+                streetAddress: "Latema Plaza Building, 3rd Floor, Room No. 302",
+                addressLocality: "Nairobi",
+                addressCountry: "KE",
+              },
+              sameAs: ["https://www.instagram.com/theeprintinghub"],
+            }),
+          }}
+        />
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
