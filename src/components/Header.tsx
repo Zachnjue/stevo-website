@@ -66,12 +66,14 @@ export default function Header() {
           })}
         </nav>
 
-        <Link
-          href="/contact"
+        <a
+          href="https://wa.me/254748679132?text=Hi%2C%20I%27d%20like%20a%20quote."
+          target="_blank"
+          rel="noopener noreferrer"
           className="eyebrow hidden border border-ink px-5 py-2.5 text-ink transition-colors hover:border-brand-blue hover:bg-brand-blue hover:text-white md:inline-block"
         >
           Get a Quote
-        </Link>
+        </a>
 
         <button
           aria-label="Toggle menu"
@@ -99,13 +101,15 @@ export default function Header() {
               </Link>
             );
           })}
-          <Link
-            href="/contact"
+          <a
+            href="https://wa.me/254748679132?text=Hi%2C%20I%27d%20like%20a%20quote."
+            target="_blank"
+            rel="noopener noreferrer"
             className="eyebrow mt-3 border border-ink px-5 py-3 text-center text-ink transition-colors hover:border-brand-blue hover:bg-brand-blue hover:text-white"
             onClick={() => setOpen(false)}
           >
             Get a Quote
-          </Link>
+          </a>
         </nav>
       )}
     </header>

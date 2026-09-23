@@ -25,7 +25,7 @@ export default function WhatsAppWidget() {
           <div className="flex items-start justify-between gap-3 bg-brand-blue-deep px-4 py-3 text-white">
             <div>
               <p className="text-sm font-semibold">Thee Printing Hub</p>
-              <p className="text-xs text-white/75">Typically replies within a day</p>
+              <p className="text-xs text-white/75">Typically replies within an hour</p>
             </div>
             <button
               type="button"
