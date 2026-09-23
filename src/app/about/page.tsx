@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import VisionMissionValues from "@/components/VisionMissionValues";
+import Testimonials from "@/components/Testimonials";
 import Reveal from "@/components/Reveal";
 import RegMark from "@/components/RegMark";
 
@@ -71,6 +72,10 @@ export default function AboutPage() {
           </Reveal>
         </div>
       </section>
+
+      <div id="testimonials">
+        <Testimonials />
+      </div>
     </div>
   );
 }

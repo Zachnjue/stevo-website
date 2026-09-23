@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Reveal from "@/components/Reveal";
 import RegMark from "@/components/RegMark";
-import ContactForm from "@/components/ContactForm";
+import Faq from "@/components/Faq";
 
 export const metadata: Metadata = {
   title: "Contact Us | Thee Printing Hub",
@@ -26,7 +26,7 @@ export default function ContactPage() {
       </section>
 
       <section className="px-6 py-16 sm:px-10 sm:py-24">
-        <div className="mx-auto grid max-w-6xl gap-16 md:grid-cols-2">
+        <div className="mx-auto grid max-w-5xl gap-16 lg:grid-cols-[1fr_auto_1fr] lg:gap-0">
           <Reveal>
             <p className="eyebrow text-accent">Address</p>
             <dl className="mt-8 space-y-6 text-ink-soft">
@@ -42,11 +42,27 @@ export default function ContactPage() {
                     Latema Plaza Building, 3rd Floor, Room No. 302
                   </a>
                 </dd>
+                <div className="mt-4 overflow-hidden rounded-lg border border-line">
+                  <iframe
+                    title="Thee Printing Hub location — Latema Plaza, 3rd Floor, Room 302"
+                    src="https://maps.google.com/maps?q=Latema%20Plaza%2C%20Nairobi&z=16&output=embed"
+                    width="100%"
+                    height="320"
+                    style={{ border: 0 }}
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                  />
+                </div>
               </div>
               <div className="border-t border-line pt-4">
                 <dt className="eyebrow text-ink">Phone</dt>
                 <dd className="mt-1">
-                  <a href="tel:0748679132" className="link-reveal">
+                  <a
+                    href="https://wa.me/254748679132"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="link-reveal"
+                  >
                     0748 679 132
                   </a>
                 </dd>
@@ -76,24 +92,13 @@ export default function ContactPage() {
                 </dd>
               </div>
             </dl>
-
-            <div className="mt-8 overflow-hidden rounded-lg border border-line">
-              <iframe
-                title="Thee Printing Hub location — Latema Plaza, 3rd Floor, Room 302"
-                src="https://maps.google.com/maps?q=Latema%20Plaza%2C%20Nairobi&z=16&output=embed"
-                width="100%"
-                height="320"
-                style={{ border: 0 }}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
-            </div>
           </Reveal>
 
-          <Reveal delay={150}>
-            <p className="eyebrow text-accent">Send a Message</p>
-            <ContactForm />
-          </Reveal>
+          <div className="hidden lg:mx-16 lg:block lg:w-px lg:bg-line" aria-hidden="true" />
+
+          <div>
+            <Faq compact />
+          </div>
         </div>
       </section>
     </div>

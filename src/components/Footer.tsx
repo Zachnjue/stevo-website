@@ -36,7 +36,12 @@ export default function Footer() {
               </a>
             </li>
             <li>
-              <a href="tel:0748679132" className="link-reveal">
+              <a
+                href="https://wa.me/254748679132"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="link-reveal"
+              >
                 0748 679 132
               </a>
             </li>

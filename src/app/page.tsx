@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import ClientMarquee from "@/components/ClientMarquee";
+import Testimonials from "@/components/Testimonials";
 import Reveal from "@/components/Reveal";
 import RegMark from "@/components/RegMark";
 
@@ -79,13 +80,14 @@ const SERVICES = [
     desc: "Gift bags, banners, notebooks, and promotional material branding that demands attention.",
     image: "/images/catalogue/posters-fliers.jpg",
   },
-  {
-    index: "04",
-    title: "Office Equipment",
-    desc: "Stationery, printers, photocopy paper, desktops, and general supplies for your workplace.",
-    image: "/images/catalogue/notebooks.jpg",
-  },
 ];
+
+// Kept off the main branding/printing line-up so it doesn't compete for
+// visual weight — see the secondary strip below "What We Do".
+const OFFICE_SUPPLIES = {
+  title: "Office Supplies",
+  desc: "Stationery, printers, photocopy paper, desktops, and general supplies for your workplace.",
+};
 
 export default function Home() {
   return (
@@ -97,10 +99,14 @@ export default function Home() {
           Branding &amp; Printing · Nairobi
         </p>
         <h1 className="display-light mt-6 max-w-5xl text-6xl leading-[0.98] sm:text-7xl lg:text-8xl xl:text-9xl">
-          Brands worth
+          Branding. Printing.
           <br />
-          remembering.
+          Merch.
         </h1>
+        <p className="mt-6 max-w-xl text-lg text-paper/85">
+          Everything your brand needs to show up professionally.
+        </p>
+        <p className="eyebrow mt-3 text-paper/60">Brands worth remembering.</p>
         <div className="mt-10 flex flex-wrap items-center gap-8">
           <Link
             href="/contact"
@@ -109,7 +115,7 @@ export default function Home() {
             Get a Quote
           </Link>
           <Link href="/catalogue" className="eyebrow link-reveal">
-            View Catalogue →
+            View Our Work →
           </Link>
         </div>
 
@@ -152,6 +158,14 @@ export default function Home() {
             View all work →
           </Link>
         </div>
+      </section>
+
+      {/* Clients */}
+      <section className="border-t border-line bg-white py-12 sm:py-16">
+        <p className="eyebrow mb-8 text-center text-ink-soft">
+          Trusted by leading brands
+        </p>
+        <ClientMarquee />
       </section>
 
       {/* What we do */}
@@ -198,7 +212,7 @@ export default function Home() {
               </Link>
             </Reveal>
 
-            <div className="grid grid-rows-3 divide-y divide-line">
+            <div className="grid grid-rows-2 divide-y divide-line">
               {SERVICES.map((s, i) => (
                 <Reveal key={s.title} delay={i * 80} className="crop-corners group relative">
                   <Link href="/services" className="flex h-full items-center gap-6 p-6">
@@ -226,15 +240,43 @@ export default function Home() {
               ))}
             </div>
           </div>
+
+          {/* Office supplies — kept secondary, out of the main branding line-up */}
+          <Reveal
+            delay={160}
+            className="mt-4 flex flex-col items-start justify-between gap-3 border border-line px-6 py-5 sm:flex-row sm:items-center"
+          >
+            <div>
+              <p className="eyebrow text-ink-soft">Also available</p>
+              <p className="mt-1 text-sm text-ink">
+                <span className="font-display text-ink">{OFFICE_SUPPLIES.title}</span>
+                {" — "}
+                {OFFICE_SUPPLIES.desc}
+              </p>
+            </div>
+            <Link href="/services" className="eyebrow link-reveal shrink-0 text-ink-soft">
+              Learn more →
+            </Link>
+          </Reveal>
         </div>
       </section>
 
-      {/* Clients */}
-      <section className="border-t border-line bg-white py-12 sm:py-16">
-        <p className="eyebrow mb-8 text-center text-ink-soft">
-          Trusted by leading brands
-        </p>
-        <ClientMarquee />
+      <Testimonials limit={1} moreHref="/about#testimonials" />
+
+      {/* Closing CTA */}
+      <section className="border-t border-line px-6 py-20 text-center sm:px-10 sm:py-28">
+        <Reveal>
+          <p className="eyebrow text-accent">Have a project in mind?</p>
+          <h2 className="display-light mx-auto mt-4 max-w-2xl text-4xl leading-[1.05] text-ink sm:text-6xl">
+            Let&apos;s put your brand in print.
+          </h2>
+          <Link
+            href="/contact"
+            className="eyebrow mt-10 inline-block border border-ink bg-ink px-7 py-3.5 text-paper transition-colors hover:bg-transparent hover:text-ink"
+          >
+            Request a Quote
+          </Link>
+        </Reveal>
       </section>
     </div>
   );
