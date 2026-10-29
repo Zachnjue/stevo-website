@@ -19,9 +19,20 @@ const display = Fraunces({
 });
 
 export const metadata: Metadata = {
-  title: "Thee Printing Hub | Branding & Printing",
+  metadataBase: new URL("https://www.theeprintinghub.com"),
+  title: "Thee Printing Hub | Branding & Printing in Nairobi",
   description:
-    "Branding and printing company in Nairobi — corporate identity, staff uniforms, promotional merchandise, office supplies, and printing services.",
+    "Thee Printing Hub is a branding and printing company in Nairobi — corporate identity, staff uniforms, promotional merchandise, office supplies, and printing services.",
+  applicationName: "Thee Printing Hub",
+  openGraph: {
+    type: "website",
+    siteName: "Thee Printing Hub",
+    locale: "en_KE",
+    title: "Thee Printing Hub | Branding & Printing in Nairobi",
+    description:
+      "Corporate identity, staff uniforms, promotional merchandise, office supplies, and printing services in Nairobi.",
+    images: ["/images/logo.png"],
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -38,7 +49,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
               "@context": "https://schema.org",
               "@type": "LocalBusiness",
               name: "Thee Printing Hub",
+              "@id": "https://www.theeprintinghub.com/#business",
               url: "https://www.theeprintinghub.com",
+              logo: "https://www.theeprintinghub.com/images/logo.png",
+              image: "https://www.theeprintinghub.com/images/logo.png",
+              alternateName: ["Thee Printing Hub Nairobi", "Printing Hub"],
               email: "theeprinting.hub@gmail.com",
               telephone: "+254748679132",
               address: {
@@ -48,6 +63,18 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
                 addressCountry: "KE",
               },
               sameAs: ["https://www.instagram.com/theeprintinghub"],
+            }),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: "Thee Printing Hub",
+              alternateName: "Thee Printing Hub Nairobi",
+              url: "https://www.theeprintinghub.com",
             }),
           }}
         />

@@ -1,8 +1,13 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import ClientMarquee from "@/components/ClientMarquee";
 import Reveal from "@/components/Reveal";
 import RegMark from "@/components/RegMark";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 // Hero mosaic. On desktop this is a 12-column, 2-row grid: the neon sign and
 // the roll-up span both rows, the other four sit in pairs between them.
