@@ -74,6 +74,8 @@ export async function addCatalogueItem(_prevState: unknown, formData: FormData) 
 
   revalidatePath("/admin");
   revalidatePath("/catalogue");
+  revalidatePath("/catalogue/[slug]", "page");
+  revalidatePath("/sitemap.xml");
   return { error: null };
 }
 
@@ -128,6 +130,8 @@ export async function updateCatalogueItem(
 
   revalidatePath("/admin");
   revalidatePath("/catalogue");
+  revalidatePath("/catalogue/[slug]", "page");
+  revalidatePath("/sitemap.xml");
   return { error: null };
 }
 
@@ -142,6 +146,8 @@ export async function deleteCatalogueItem(id: string, imagePath: string | null) 
 
   revalidatePath("/admin");
   revalidatePath("/catalogue");
+  revalidatePath("/catalogue/[slug]", "page");
+  revalidatePath("/sitemap.xml");
 }
 
 export async function addCategory(_prevState: unknown, formData: FormData) {
@@ -160,5 +166,7 @@ export async function addCategory(_prevState: unknown, formData: FormData) {
 
   revalidatePath("/admin");
   revalidatePath("/catalogue");
+  revalidatePath("/catalogue/[slug]", "page");
+  revalidatePath("/sitemap.xml");
   return { error: null };
 }

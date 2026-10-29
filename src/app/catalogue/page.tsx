@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import CategoryGallery from "@/components/CategoryGallery";
-import type { Photo, Product } from "@/components/PhotoMasonry";
+import type { Product } from "@/components/PhotoMasonry";
 import RegMark from "@/components/RegMark";
-import { createClient } from "@/lib/supabase/server";
+import { getCatalogue, type CatalogueProduct } from "@/lib/catalogue";
 
 export const metadata: Metadata = {
   title: "Catalogue | Thee Printing Hub",
@@ -10,64 +10,23 @@ export const metadata: Metadata = {
     "Browse Thee Printing Hub's catalogue of branded merchandise, uniforms, and printed materials — real work produced for our clients.",
 };
 
-const LOCAL_PREFIX = "local:";
 const INK_BARS = ["bg-brand-blue", "bg-brand-pink", "bg-brand-yellow", "bg-ink"];
 
+// Same hourly refresh as the product pages; admin edits revalidate sooner.
+export const revalidate = 3600;
+
 export default async function CataloguePage() {
-  const supabase = await createClient();
-
-  const [{ data: categories }, { data: items }] = await Promise.all([
-    supabase.from("categories").select("*").order("sort_order"),
-    supabase
-      .from("catalogue_items")
-      .select("*")
-      .order("sort_order", { ascending: true })
-      .order("created_at", { ascending: false }),
-  ]);
-
-  const itemsByCategory = new Map<string, typeof items>();
-  for (const item of items ?? []) {
-    // Only show finished work: pieces still waiting on a photo stay hidden.
-    if (!item.image_path) continue;
-    const list = itemsByCategory.get(item.category_id) ?? [];
-    list.push(item);
-    itemsByCategory.set(item.category_id, list);
-  }
-
-  // Categories that have at least one photographed piece.
-  const visibleCategories = (categories ?? []).filter(
-    (c) => (itemsByCategory.get(c.id) ?? []).length > 0
-  );
-
-  // Turn a database row's stored path into a photo the gallery can display.
-  function toPhoto(item: NonNullable<typeof items>[number]): Photo {
-    const fit = item.fit as "contain" | "cover";
-    const path = item.image_path as string;
-    if (path.startsWith(LOCAL_PREFIX)) {
-      const localPath = path.slice(LOCAL_PREFIX.length);
-      // A path starting with "/" is already a full public path (e.g. seeded
-      // from another section's images) — use it as-is instead of joining it
-      // under the catalogue's own image folder.
-      return localPath.startsWith("/")
-        ? { url: localPath, fit }
-        : { file: localPath, fit };
-    }
-    const {
-      data: { publicUrl },
-    } = supabase.storage.from("catalogue").getPublicUrl(path);
-    return { url: publicUrl, fit };
-  }
+  // Only categories with at least one photographed product are returned.
+  const visibleCategories = await getCatalogue();
 
   // Rows that share a name within a category are one product with several
-  // photos, so each product is listed once (in the order it first appears).
-  function toProducts(rows: NonNullable<typeof items>): Product[] {
-    const byName = new Map<string, Product>();
-    for (const row of rows) {
-      const existing = byName.get(row.name);
-      if (existing) existing.photos.push(toPhoto(row));
-      else byName.set(row.name, { name: row.name, photos: [toPhoto(row)] });
-    }
-    return [...byName.values()];
+  // photos, so each product is listed once (grouped in getCatalogue).
+  function toProducts(products: CatalogueProduct[]): Product[] {
+    return products.map((p) => ({
+      name: p.name,
+      slug: p.slug,
+      photos: p.images.map((i) => ({ url: i.src, fit: i.fit })),
+    }));
   }
 
   return (
@@ -99,7 +58,7 @@ export default async function CataloguePage() {
 
       {visibleCategories.map((category, ci) => {
         // Numbering restarts at 01 in every category.
-        const products = toProducts(itemsByCategory.get(category.id) ?? []);
+        const products = toProducts(category.products);
 
         return (
           <section

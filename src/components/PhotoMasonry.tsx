@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import Reveal from "@/components/Reveal";
 
 export type Photo = {
@@ -14,6 +15,8 @@ export type Photo = {
 // small switcher, instead of being repeated as separate tiles.
 export type Product = {
   name: string;
+  /** Catalogue page for this product, when it has one. */
+  slug?: string;
   photos: Photo[];
 };
 
@@ -95,7 +98,17 @@ function ProductTile({
         </div>
         <p className="eyebrow mt-3 text-ink-soft">
           <span className="text-accent">{String(number).padStart(2, "0")}</span>{" "}
-          — {product.name}
+          —{" "}
+          {product.slug ? (
+            <Link
+              href={`/catalogue/${product.slug}`}
+              className="link-reveal hover:text-ink"
+            >
+              {product.name}
+            </Link>
+          ) : (
+            product.name
+          )}
         </p>
       </div>
     </Reveal>
