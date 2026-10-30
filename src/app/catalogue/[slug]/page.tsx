@@ -56,17 +56,20 @@ export default async function ProductPage({
   const description = describeProduct(product);
   const url = `${BASE_URL}/catalogue/${product.slug}`;
 
-  // No price is published, so there is no Offer; Google still reads the
-  // product's name, images and description from this.
+  // No price, rating or review is published, and Google rejects a Product
+  // without one of offers/review/aggregateRating, so this is a WebPage.
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "Product",
+    "@type": "WebPage",
     name: product.name,
     description,
-    image: product.images.map((i) => i.absoluteUrl),
-    category: product.categoryTitle,
     url,
-    brand: { "@type": "Brand", name: "Thee Printing Hub" },
+    primaryImageOfPage: product.images[0]
+      ? { "@type": "ImageObject", url: product.images[0].absoluteUrl }
+      : undefined,
+    image: product.images.map((i) => i.absoluteUrl),
+    about: product.categoryTitle,
+    isPartOf: { "@type": "WebSite", name: "Thee Printing Hub", url: BASE_URL },
   };
 
   const breadcrumbs = {
